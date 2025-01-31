@@ -1,0 +1,43 @@
+body 
+{
+    background-color: rgba(0, 0, 0, 0.425);
+}
+.rect
+{
+    fill: rgba(255, 255, 255, 0);
+    stroke: rgb(255, 255, 255);
+    stroke-dasharray: 1000;
+    stroke-dashoffset: 1000;
+    transition: stroke-dashoffset 1s;
+}
+.container 
+{
+    max-width: 1920px;
+    padding: 0 331px;
+    margin: 10px;
+}
+.element 
+{
+    width: 50px;
+    height: 50px;
+    background: black;
+    position: absolute;
+}
+.wrap 
+{
+    min-height: 100vh;
+    display: flex;
+    flex-direction: column
+}
+.content 
+{
+    flex: 1
+}
+.navbar 
+{
+    height: 0;
+}
+.sizecell 
+{
+    width: calc(715px - 80px);
+}
