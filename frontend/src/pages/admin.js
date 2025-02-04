@@ -170,7 +170,10 @@ const AdminPage = observer(() => {
                                 Отмена
                             </Button>
                             <Button variant="danger"
-                                onClick={() => deltrain(id_train1)}>
+                                onClick={() => {
+                                    deltrain(id_train1)
+                                    setShowModal(false)
+                                    }}>
                                 Да, удалить
                             </Button>
                         </Modal.Footer>
