@@ -70,7 +70,7 @@ const AdminPage = observer(() => {
     return (
         <Container
             style={{ backgroundColor: '#313131', borderRadius: '15px', marginTop: '6px', fontFamily: "Play", width: '500px' }}>
-            <Card style={{ borderRadius: 80, fontFamily: "Play", backgroundColor: '#C9E956', marginTop: '60px' }} className="p-5 #FFFAF4">
+            <Card style={{ borderRadius: 80, fontFamily: "Play", backgroundColor: '#C9E956', marginTop: '60px', display: 'flex', justifyContent: 'center', alignItems: 'center' }} className="p-5 #FFFAF4">
                 <p style={{ fontSize: '24px' }}>Регистрация</p>
                 <Form className="d-flex flex-column">
                     <Form.Control
@@ -105,7 +105,7 @@ const AdminPage = observer(() => {
 
 
 
-            <Card style={{ borderRadius: 80, fontFamily: "Play", backgroundColor: '#C9E956', marginTop: '60px' }} className="p-5 #FFFAF4">
+            <Card style={{ borderRadius: 80, fontFamily: "Play", backgroundColor: '#C9E956', marginTop: '60px', display: 'flex', justifyContent: 'center', alignItems: 'center' }} className="p-5 #FFFAF4">
                 <p style={{ fontSize: '24px' }}>Добавление данных о поезде в БД</p>
                 <Form className="d-flex flex-column">
                     <Form.Control
@@ -137,7 +137,7 @@ const AdminPage = observer(() => {
 
 
 
-            <Card style={{ borderRadius: 80, fontFamily: "Play", backgroundColor: '#C9E956', marginTop: '60px' }} className="p-5 #FFFAF4">
+            <Card style={{ borderRadius: 80, fontFamily: "Play", backgroundColor: '#C9E956', marginTop: '60px', display: 'flex', justifyContent: 'center', alignItems: 'center' }} className="p-5 #FFFAF4">
                 <p style={{ fontSize: '24px' }}>Удаление по ID поезда</p>
                 <Form className="d-flex flex-column">
                     <Form.Control
@@ -158,18 +158,20 @@ const AdminPage = observer(() => {
                         >
                             Удалить
                         </Button></p>
-                    <Modal show={showModal} onHide={() => setShowModal(false)}>
-                        <Modal.Header closeButton>
+                    <Modal style={{ fontFamily: 'Play' }} show={showModal} onHide={() => setShowModal(false)}>
+                        <Modal.Header style={{ backgroundColor: '#C9E956', fontSize: '24px' }} closeButton>
                             <Modal.Title>Подтверждение удаления</Modal.Title>
                         </Modal.Header>
-                        <Modal.Body>
+                        <Modal.Body style={{ backgroundColor: '#C9E956', fontSize: '20px' }}>
                             Вы уверены, что хотите удалить эту запись?
                         </Modal.Body>
-                        <Modal.Footer>
-                            <Button variant="secondary" onClick={() => setShowModal(false)}>
+                        <Modal.Footer style={{ backgroundColor: '#C9E956' }}>
+                            <Button variant="secondary" onClick={() => setShowModal(false)}
+                                style={{ fontSize: '18px' }}>
                                 Отмена
                             </Button>
                             <Button variant="danger"
+                                style={{ fontSize: '18px' }}
                                 onClick={() => {
                                     deltrain(id_train1)
                                     setShowModal(false)
@@ -180,22 +182,8 @@ const AdminPage = observer(() => {
                     </Modal>
                 </Form></Card>
 
-
-
-
-
-            <Card style={{ borderRadius: 80, fontFamily: "Play", backgroundColor: '#C9E956', marginTop: '60px' }} className="p-5 #FFFAF4">
-                <p style={{ marginTop: '30px', display: 'flex', justifyContent: 'center' }}>
-                    <Button
-                        size={"lg"}
-                        variant={"outline-success"}
-                        style={{ fontWeight: 'bold', borderRadius: 37, width: '300px', height: '100px' }}
-                        onClick={per}>
-                        Перейти на страницу с выводом пользователей
-                    </Button></p></Card>
-
-            <Card style={{ borderRadius: 80, fontFamily: "Play", backgroundColor: '#C9E956', marginTop: '60px' }} className="p-5 #FFFAF4">
-                <p style={{ fontSize: '24px', color:'purple', fontWeight:'bold', textDecoration:'underline' }}>Обновление пользователя по ID</p>
+            <Card style={{ borderRadius: 80, fontFamily: "Play", backgroundColor: '#C9E956', marginTop: '60px', display: 'flex', justifyContent: 'center', alignItems: 'center' }} className="p-5 #FFFAF4">
+                <p style={{ fontSize: '24px', color: 'purple', fontWeight: 'bold', textDecoration: 'underline' }}>Обновление пользователя по ID</p>
                 <Form>
                     <Form.Label style={{ fontSize: '24px' }}>ID пользователя</Form.Label>
                     <Form.Control
@@ -226,7 +214,15 @@ const AdminPage = observer(() => {
                 </Form>
             </Card>
 
-
+            <Card style={{ borderRadius: 80, fontFamily: "Play", backgroundColor: '#C9E956', marginTop: '60px' }} className="p-5 #FFFAF4">
+                <p style={{ marginTop: '30px', display: 'flex', justifyContent: 'center' }}>
+                    <Button
+                        size={"lg"}
+                        variant={"outline-success"}
+                        style={{ fontWeight: 'bold', borderRadius: 37, width: '300px', height: '100px' }}
+                        onClick={per}>
+                        Перейти на страницу с выводом пользователей
+                    </Button></p></Card>
         </Container>
     );
 }
