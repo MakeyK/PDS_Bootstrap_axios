@@ -1,6 +1,6 @@
 import React, { useState, useEffect, useContext } from "react";
 import { observer } from "mobx-react-lite";
-import { Card, Container, Button } from 'react-bootstrap';
+import { Card, Container, Button, Form } from 'react-bootstrap';
 import 'bootstrap/dist/css/bootstrap.min.css';
 import { useNavigate } from "react-router-dom";
 import { getAllUsers as fetchAllUsers } from '../http/userApi'; // Изменено имя функции для избежания конфликта
@@ -16,6 +16,7 @@ const GetUsers = observer(() => {
     const getAllUsers = async () => {
         try {
             const response = await fetchAllUsers();
+            console.log({ message: "Вывод пользователей", response });
             UserRequest.setUserRequest(response);
         } catch (error) {
             alert(error);
@@ -50,6 +51,7 @@ const GetUsers = observer(() => {
             ) : (
                 showList && <div>Недостаточно прав или нет пользователей!</div>
             )}
+
         </Container>
     );
 });

@@ -1,14 +1,12 @@
 import React, { useState, useEffect, useContext } from "react";
 import { observer } from "mobx-react-lite";
-import { Card, Container, Form, Button, ListGroup } from 'react-bootstrap';
+import { Card, Container, Form, Button } from 'react-bootstrap';
 import 'bootstrap/dist/css/bootstrap.min.css';
 import { useLocation, useNavigate } from "react-router-dom";
-import { createTrains, deleteIDTrain, registration, getAllUsers } from '../http/userApi'
+import { createTrains, deleteIDTrain, registration, updateUser } from '../http/userApi'
 import { Context } from "../index";
-import ListUser from "./listUsers";
 import Modal from 'react-bootstrap/Modal';
 import { GETUSER_ROUTE } from "../utils/consts";
-import GetUsers from "./getusers";
 
 const AdminPage = observer(() => {
     document.body.style.backgroundColor = "#313131"
@@ -19,25 +17,19 @@ const AdminPage = observer(() => {
     const [password, setPassword] = useState('')
     const [number_train, setNumberTrain] = useState('')
     const [type_train, setTypeTrain] = useState('')
-    const [id_train, setID_Train] = useState('')
     const [id_train1, setID_Train1] = useState('')
     const [showModal, setShowModal] = useState(false);
     const location = useLocation()
+    const [id_user, setIdUser] = useState('');
+    const [newLogin, setNewLogin] = useState('');
+    const [newPassword, setNewPassword] = useState('');
+
     const click = async () => {
         try {
             const response = await registration(login, password)
             user.setIsAuth(true)
             user.setUser()
-            console.log(response)
-        } catch (error) {
-            alert(error)
-        }
-    }
-
-    const getAllUsers = async () => {
-        try {
-            const response = await getAllUsers()
-            return response
+            console.log({ message: 'Зарегался, молодец', response })
         } catch (error) {
             alert(error)
         }
@@ -46,6 +38,7 @@ const AdminPage = observer(() => {
     const train = async (number_train, type_train) => {
         try {
             const response2 = await createTrains(number_train, type_train)
+            console.log({ message: 'Поезд добавлен', response2 })
             return response2
         } catch (error) {
             alert(error)
@@ -55,14 +48,24 @@ const AdminPage = observer(() => {
     const deltrain = async (id_train1) => {
         try {
             const response = await deleteIDTrain(id_train1)
+            console.log({ message: `Удален поезд под ${id_train1}`, response })
         } catch (error) {
             alert(error)
         }
     }
-    
-    const per = async () =>{
+
+    const per = async () => {
         navigate(GETUSER_ROUTE)
     }
+
+    const UpdateUser = async (login, password) => {
+        try {
+            const response = await updateUser(login, password)
+            console.log(`Пользователь обновлён`, response)
+        } catch (error) {
+            console.error("Ошибка при обновлении пользователя:", error)
+        }
+    };
 
     return (
         <Container
@@ -177,20 +180,59 @@ const AdminPage = observer(() => {
 
 
 
-                
-                <Card style={{ borderRadius: 80, fontFamily: "Play", backgroundColor: '#C9E956', marginTop: '60px' }} className="p-5 #FFFAF4">
+
+            <Card style={{ borderRadius: 80, fontFamily: "Play", backgroundColor: '#C9E956', marginTop: '60px' }} className="p-5 #FFFAF4">
                 <p style={{ marginTop: '30px', display: 'flex', justifyContent: 'center' }}>
                     <Button
                         size={"lg"}
                         variant={"outline-success"}
                         style={{ fontWeight: 'bold', borderRadius: 37, width: '300px', height: '100px' }}
                         onClick={per}
-                        >
+                    >
                         Перейти на страницу с выводом пользователей
                     </Button></p></Card>
-            
 
 
+
+            <Card style={{ borderRadius: 80, fontFamily: "Play", backgroundColor: '#C9E956', marginTop: '60px' }} className="p-5 #FFFAF4">
+                <Form>
+                    <Form.Group controlId="formUserId">
+                        <Form.Label style={{ fontSize: '24px' }}>ID пользователя</Form.Label>
+                        <Form.Control
+                            style={{ borderRadius: 70, backgroundColor: '#7F933A', height: 71, border: "1px solid", fontSize: "24px", marginBottom: '20px' }}
+                            placeholder="Введите ID пользователя"
+                            value={id_user}
+                            onChange={(e) => setIdUser(e.target.value)}
+                        />
+                    </Form.Group>
+                    <Form.Group controlId="formNewLogin">
+                        <Form.Label style={{ fontSize: '24px' }}>Новый логин</Form.Label>
+                        <Form.Control
+                            style={{ borderRadius: 70, backgroundColor: '#7F933A', height: 71, border: "1px solid", fontSize: "24px", marginBottom: '20px' }}
+                            placeholder="Введите новый логин"
+                            value={login}
+                            onChange={(e) => setLogin(e.target.value)}
+                        />
+                    </Form.Group>
+                    <Form.Group controlId="formNewPassword">
+                        <Form.Label style={{ fontSize: '24px' }}>Новый пароль</Form.Label>
+                        <Form.Control
+                            style={{ borderRadius: 70, backgroundColor: '#7F933A', height: 71, border: "1px solid", fontSize: "24px", marginBottom: '20px' }}
+                            type="password"
+                            placeholder="Введите новый пароль"
+                            value={password}
+                            onChange={(e) => setPassword(e.target.value)}
+                        />
+                    </Form.Group>
+                    <Button
+                        size={"lg"}
+                        variant={"outline-success"}
+                        style={{ fontWeight: 'bold', borderRadius: 37, width: '250px', height: '70px' }}
+                        onClick={UpdateUser}>
+                        Обновить пользователя
+                    </Button>
+                </Form>
+            </Card>
 
 
         </Container>
