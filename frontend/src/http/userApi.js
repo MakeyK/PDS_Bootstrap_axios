@@ -36,9 +36,9 @@ export const deleteIDTrain = async (id_train1) => {
     }
 }
 
-export const updateUser = async (id_user) => {
+export const updateUser = async (id_user, login, password) => {
     try {
-        const { data } = await $host.patch(`mak/rout/red/${id_user}`)
+        const { data } = await $host.patch(`mak/rout/red/${id_user}`, {login, password})
         return data
     } catch (error) {
         alert(error.response.data.message)

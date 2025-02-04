@@ -58,9 +58,9 @@ const AdminPage = observer(() => {
         navigate(GETUSER_ROUTE)
     }
 
-    const UpdateUser = async (login, password) => {
+    const UpdateUser = async (id_user, login, password) => {
         try {
-            const response = await updateUser(login, password)
+            const response = await updateUser(id_user, login, password)
             console.log(`Пользователь обновлён`, response)
         } catch (error) {
             console.error("Ошибка при обновлении пользователя:", error)
@@ -173,7 +173,7 @@ const AdminPage = observer(() => {
                                 onClick={() => {
                                     deltrain(id_train1)
                                     setShowModal(false)
-                                    }}>
+                                }}>
                                 Да, удалить
                             </Button>
                         </Modal.Footer>
@@ -190,48 +190,37 @@ const AdminPage = observer(() => {
                         size={"lg"}
                         variant={"outline-success"}
                         style={{ fontWeight: 'bold', borderRadius: 37, width: '300px', height: '100px' }}
-                        onClick={per}
-                    >
+                        onClick={per}>
                         Перейти на страницу с выводом пользователей
                     </Button></p></Card>
 
-
-
             <Card style={{ borderRadius: 80, fontFamily: "Play", backgroundColor: '#C9E956', marginTop: '60px' }} className="p-5 #FFFAF4">
+                <p style={{ fontSize: '24px', color:'purple', fontWeight:'bold', textDecoration:'underline' }}>Обновление пользователя по ID</p>
                 <Form>
-                    <Form.Group controlId="formUserId">
-                        <Form.Label style={{ fontSize: '24px' }}>ID пользователя</Form.Label>
-                        <Form.Control
-                            style={{ borderRadius: 70, backgroundColor: '#7F933A', height: 71, border: "1px solid", fontSize: "24px", marginBottom: '20px' }}
-                            placeholder="Введите ID пользователя"
-                            value={id_user}
-                            onChange={(e) => setIdUser(e.target.value)}
-                        />
-                    </Form.Group>
-                    <Form.Group controlId="formNewLogin">
-                        <Form.Label style={{ fontSize: '24px' }}>Новый логин</Form.Label>
-                        <Form.Control
-                            style={{ borderRadius: 70, backgroundColor: '#7F933A', height: 71, border: "1px solid", fontSize: "24px", marginBottom: '20px' }}
-                            placeholder="Введите новый логин"
-                            value={login}
-                            onChange={(e) => setLogin(e.target.value)}
-                        />
-                    </Form.Group>
-                    <Form.Group controlId="formNewPassword">
-                        <Form.Label style={{ fontSize: '24px' }}>Новый пароль</Form.Label>
-                        <Form.Control
-                            style={{ borderRadius: 70, backgroundColor: '#7F933A', height: 71, border: "1px solid", fontSize: "24px", marginBottom: '20px' }}
-                            type="password"
-                            placeholder="Введите новый пароль"
-                            value={password}
-                            onChange={(e) => setPassword(e.target.value)}
-                        />
-                    </Form.Group>
+                    <Form.Label style={{ fontSize: '24px' }}>ID пользователя</Form.Label>
+                    <Form.Control
+                        style={{ borderRadius: 70, backgroundColor: '#7F933A', height: 71, border: "1px solid", fontSize: "24px", marginBottom: '20px' }}
+                        placeholder="Введите ID пользователя..."
+                        value={id_user}
+                        onChange={(e) => setIdUser(e.target.value)} />
+                    <Form.Label style={{ fontSize: '24px' }}>Новый логин</Form.Label>
+                    <Form.Control
+                        style={{ borderRadius: 70, backgroundColor: '#7F933A', height: 71, border: "1px solid", fontSize: "24px", marginBottom: '20px' }}
+                        placeholder="Введите новый логин..."
+                        value={newLogin}
+                        onChange={(e) => setNewLogin(e.target.value)} />
+                    <Form.Label style={{ fontSize: '24px' }}>Новый пароль</Form.Label>
+                    <Form.Control
+                        style={{ borderRadius: 70, backgroundColor: '#7F933A', height: 71, border: "1px solid", fontSize: "24px", marginBottom: '20px' }}
+                        type="password"
+                        placeholder="Введите новый пароль..."
+                        value={newPassword}
+                        onChange={(e) => setNewPassword(e.target.value)} />
                     <Button
                         size={"lg"}
                         variant={"outline-success"}
                         style={{ fontWeight: 'bold', borderRadius: 37, width: '250px', height: '70px' }}
-                        onClick={UpdateUser}>
+                        onClick={() => UpdateUser(id_user, newLogin, newPassword)}>
                         Обновить пользователя
                     </Button>
                 </Form>
