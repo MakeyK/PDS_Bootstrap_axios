@@ -60,24 +60,20 @@ class DBControllerUsers {
         try {
             const { id_user } = req.params;
             const { login, password } = req.body;
-            // Проверка наличия логина и пароля
             if (!login || !password) {
                 return next(ApiError.badRequest("Введите логин и пароль"));
             }
-            // Проверка существования пользователя
             const user = await Users.findOne({ where: { id_user } });
             if (!user) {
                 return next(ApiError.notFound("Пользователь не найден"));
             }
-            // Обновление данных пользователя
             user.login = login;
             user.password = password;
             await user.save();
-            // Возвращаем обновленного пользователя
             return res.json(user);
         } catch (error) {
             console.error("Ошибка при обновлении пользователя:", error);
-            return next(ApiError.internal("Ошибка при обновлении пользователя"));
+            return next(ApiError.badRequest("Ошибка при обновлении пользователя"));
         }
     }
 }

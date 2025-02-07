@@ -6,6 +6,7 @@ import { useNavigate } from "react-router-dom";
 import { getAllUsers as fetchAllUsers } from '../http/userApi'; // Изменено имя функции для избежания конфликта
 import { Context } from "../index";
 import ListUser from "./listUsers";
+import { ADMIN_ROUTE } from "../utils/consts";
 
 const GetUsers = observer(() => {
     document.body.style.backgroundColor = "#313131";
@@ -26,6 +27,10 @@ const GetUsers = observer(() => {
     useEffect(() => {
         getAllUsers();
     }, []);
+
+    const per = async () => {
+        navigate(ADMIN_ROUTE)
+    }
 
     const handleToggleList = () => {
         setShowList(prevShowList => !prevShowList);
@@ -52,6 +57,12 @@ const GetUsers = observer(() => {
                 showList && <div>Недостаточно прав или нет пользователей!</div>
             )}
 
+            <Button
+                size={"lg"}
+                variant={"success"}
+                style={{ fontWeight: 'bold', borderRadius: 37, width: '250px', height: '70px', marginTop:"50px", marginLeft:'120px' }}
+                onClick={per}> Вернуться обратно
+            </Button>
         </Container>
     );
 });
