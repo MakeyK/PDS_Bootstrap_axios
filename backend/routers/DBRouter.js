@@ -7,7 +7,10 @@ const DBControllerStations = require('../controllers/DBControllerStations')
 const DBControllerTrains = require('../controllers/DBControllerTrains')
 const DBControllerVans = require('../controllers/DBControllerVans')
 const DBControllerTickets = require('../controllers/DBCotrollerTickets')
+const AuthController = require('../controllers/AuthController')
 const db = require('../db')
+
+router.post('/registration', AuthController.registration)
 
 
 // Создание записей в таблицах

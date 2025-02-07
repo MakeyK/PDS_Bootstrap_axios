@@ -1,7 +1,7 @@
 const ApiError = require('../ApiError')
 const bcrypt = require('bcrypt')
 const jwt = require('jsonwebtoken')
-const {User, UserStorage} = require('../models/model')
+const {Users, UserStorage} = require('../models/models')
 const sequelize = require('../db');
 
 const generateJwt = (id_user, login, password) => 
@@ -20,12 +20,12 @@ class AuthController
   {
     try {
       const {login, password} = req.body
-      let candidate = await User.findOne({where: {login}})
+      let candidate = await Users.findOne({where: {login}})
       if (candidate)  
       {
         return next(ApiError.badRequest('Пользователь с таким login уже существует'))
       }
-      const user = await User.create({login, password})
+      const user = await Users.create({login, password})
       const token = generateJwt(user.id_user, user.login, user.password)
       return res.json({token})
     } catch (error) {
@@ -39,7 +39,7 @@ class AuthController
   {
     try {
       const {login} = req.body
-      const user = await User.findOne({where: {login}})
+      const user = await Users.findOne({where: {login}})
       if (!user)
       {
         return next(ApiError.internal('Пользователь не найден'))

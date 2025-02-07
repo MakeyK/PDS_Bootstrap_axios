@@ -2,6 +2,7 @@ const { Users, Passengers, Tickets, Trains, Schedules, Van, Stations } = require
 const { Sequelize } = require('../db')
 const { QueryTypes } = require('sequelize')
 const sequelize = require('../db')
+const jwt = require('jsonwebtoken')
 const ApiError = require('../ApiError')
 
 class DBControllerUsers {
@@ -58,19 +59,38 @@ class DBControllerUsers {
     // Обновление логина и пароля пользователя по ID_user
     async updateUser(req, res, next) {
         try {
-            const { id_user } = req.params;
             const { login, password } = req.body;
-            if (!login || !password) {
-                return next(ApiError.badRequest("Введите логин и пароль"));
+            const token = req.headers.authorization?.split(' ')[1];
+            if (!token) {
+                return next(ApiError.badRequest('Токен не предоставлен'));
             }
+            let decoded;
+            try {
+                decoded = jwt.verify(token, process.env.SECRET_KEY);
+            } catch (jwtError) {
+                console.error("Ошибка декодирования токена:", jwtError);
+                return next(ApiError.badRequest("Недействительный токен"));
+            }
+    
+            const id_user = decoded.id_user;
             const user = await Users.findOne({ where: { id_user } });
+    
             if (!user) {
                 return next(ApiError.notFound("Пользователь не найден"));
             }
-            user.login = login;
-            user.password = password;
+    
+            if (!login || !password) {
+                return next(ApiError.badRequest('Введите логин или пароль для обновления'));
+            }
+    
+            if (login) {
+                user.login = login;
+            }
+            if (password) {
+                user.password = password;
+            }
             await user.save();
-            return res.json(user);
+            return res.json({ message: 'Данные обновлены', user });
         } catch (error) {
             console.error("Ошибка при обновлении пользователя:", error);
             return next(ApiError.badRequest("Ошибка при обновлении пользователя"));

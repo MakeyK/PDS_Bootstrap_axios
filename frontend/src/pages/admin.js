@@ -27,8 +27,6 @@ const AdminPage = observer(() => {
     const click = async () => {
         try {
             const response = await registration(login, password)
-            user.setIsAuth(true)
-            user.setUser()
             console.log({ message: 'Зарегался, молодец', response })
         } catch (error) {
             alert(error)
@@ -58,9 +56,9 @@ const AdminPage = observer(() => {
         navigate(GETUSER_ROUTE)
     }
 
-    const UpdateUser = async (id_user, login, password) => {
+    const UpdateUser = async (login, password) => {
         try {
-            const response = await updateUser(id_user, login, password)
+            const response = await updateUser(login, password)
             console.log(`Пользователь обновлён`, response)
         } catch (error) {
             console.error("Ошибка при обновлении пользователя:", error)
@@ -96,8 +94,7 @@ const AdminPage = observer(() => {
                             size={"lg"}
                             variant={"outline-success"}
                             style={{ fontWeight: 'bold', borderRadius: 37, width: '250px', height: '70px' }}
-                            onClick={click}
-                        >
+                            onClick={click}>
                             Зарегистрироваться
                         </Button></p>
                 </Form>

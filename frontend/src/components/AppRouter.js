@@ -1,7 +1,7 @@
 import React, { useContext } from "react"; 
 import {Routes, Route, Navigate} from 'react-router-dom'  
 import { authRoutes, publicRoutes } from "../routes"; 
-import {ADMIN_ROUTE, GETUSER_ROUTE} from "../utils/consts"; 
+import {ADMIN_ROUTE, GETUSER_ROUTE, UPDATE_ROUTE} from "../utils/consts"; 
 import { Context } from "../index"; 
 
 const AppRouter = () => { 
@@ -29,6 +29,12 @@ const AppRouter = () => {
     <Route>
         {publicRoutes.map(({path, Component}) =>
         <Route  path="*" element = {<Navigate> to={GETUSER_ROUTE}</Navigate>} replace/>
+        
+    )} 
+    </Route>
+    <Route>
+        {publicRoutes.map(({path, Component}) =>
+        <Route  path="*" element = {<Navigate> to={UPDATE_ROUTE}</Navigate>} replace/>
         
     )} 
     </Route>

@@ -2,7 +2,7 @@ import { $authHost, $host } from "./index";
 import { jwtDecode } from 'jwt-decode';
 
 export const registration = async (login, password) => {
-    const { data } = await $host.post('mak/rout/createuser', { login, password })
+    const { data } = await $host.post('mak/rout/registration', { login, password })
     localStorage.setItem('token', data.token)
     return jwtDecode(data.token)
 }
@@ -38,8 +38,20 @@ export const deleteIDTrain = async (id_train1) => {
 
 export const updateUser = async (id_user, login, password) => {
     try {
-        const { data } = await $host.patch(`mak/rout/red/${id_user}`, {login, password})
-        return data
+        const token = localStorage.getItem("token");
+        if (!token) {
+            alert("Токен не найден");
+            return;
+        }
+        const { data } = await $host.patch(`/mak/rout/red/${id_user}`, {
+            login,
+            password
+        }, {
+            headers: {
+                Authorization: `Bearer ${token}`
+            }
+        });
+        return data;
     } catch (error) {
         alert(error.response.data.message)
     }
