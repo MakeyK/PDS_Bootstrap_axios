@@ -57,6 +57,10 @@ const AdminPage = observer(() => {
         navigate(GETUSER_ROUTE)
     }
 
+    const update = async () => {
+        navigate(UPDATE_ROUTE)
+    }
+
     const UpdateUser = async (login, password) => {
         try {
             const response = await updateUser(login, password)
@@ -220,6 +224,16 @@ const AdminPage = observer(() => {
                         style={{ fontWeight: 'bold', borderRadius: 37, width: '300px', height: '100px' }}
                         onClick={per}>
                         Перейти на страницу с выводом пользователей
+                    </Button></p></Card>
+
+            <Card style={{ borderRadius: 80, fontFamily: "Play", backgroundColor: '#C9E956', marginTop: '60px' }} className="p-5 #FFFAF4">
+                <p style={{ marginTop: '30px', display: 'flex', justifyContent: 'center' }}>
+                    <Button
+                        size={"lg"}
+                        variant={"outline-success"}
+                        style={{ fontWeight: 'bold', borderRadius: 37, width: '300px', height: '100px' }}
+                        onClick={update}>
+                        Обновить свои данные
                     </Button></p></Card>
         </Container>
     );
