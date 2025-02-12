@@ -71,23 +71,20 @@ class DBControllerUsers {
                 console.error("Ошибка декодирования токена:", jwtError);
                 return next(ApiError.badRequest("Недействительный токен"));
             }
-    
             const id_user = decoded.id_user;
             const user = await Users.findOne({ where: { id_user } });
-    
             if (!user) {
                 return next(ApiError.notFound("Пользователь не найден"));
             }
-    
-            if (!login || !password) {
+            console.log("Полученные данные:", { login, password });
+            if (!login?.trim() && !password?.trim()) {
                 return next(ApiError.badRequest('Введите логин или пароль для обновления'));
             }
-    
             if (login) {
-                user.login = login;
+                user.login = login.trim();
             }
             if (password) {
-                user.password = password;
+                user.password = password.trim();
             }
             await user.save();
             return res.json({ message: 'Данные обновлены', user });

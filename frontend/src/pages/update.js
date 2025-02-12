@@ -1,4 +1,4 @@
-import React, { useState, useEffect, useContext } from "react";
+import React, { useState, useContext } from "react";
 import { observer } from "mobx-react-lite";
 import { Card, Container, Button, Form } from 'react-bootstrap';
 import 'bootstrap/dist/css/bootstrap.min.css';
@@ -11,34 +11,33 @@ const UpdateUser = observer(() => {
     document.body.style.backgroundColor = "#313131";
     const { UserRequest } = useContext(Context);
     const navigate = useNavigate();
-    const [login, setLogin] = useState('')
-    const [password, setPassword] = useState('')
+    const [login, setLogin] = useState('');
+    const [password, setPassword] = useState('');
 
-    const per = async () => {
-        navigate(ADMIN_ROUTE)
-    }
+    const per = () => {
+        navigate(ADMIN_ROUTE);
+    };
 
-    const UpdateUser = async (login, password) => {
-            try {
-                const response = await updateUser(login, password)
-                console.log(`Пользователь обновлён`, response)
-                return response
-            } catch (error) {
-                console.error("Ошибка при обновлении пользователя:", error)
-                alert(error)
-            }
-        };
+    const UpdateUser = async (e) => {
+        e.preventDefault();
+        try {
+            console.log('Какие данные получили', login, password);
+            const response = await updateUser(login, password);
+            console.log("После запроса", login, password, response)
+        } catch (error) {
+            console.error("Ошибка при обновление пользователя:", error);
+        }
+    };
 
     return (
         <Container style={{ backgroundColor: '#313131', borderRadius: '15px', marginTop: '6px', fontFamily: "Play", width: '500px' }}>
             <Card style={{ borderRadius: 80, fontFamily: "Play", backgroundColor: '#C9E956', marginTop: '60px' }} className="p-5 #FFFAF4">
-
                 <p style={{ fontSize: '24px' }}>Обновить свои данные</p>
-                <Form className="d-flex flex-column">
+                <Form className="d-flex flex-column" onSubmit={UpdateUser}>
                     <Form.Control
                         style={{ borderRadius: 70, backgroundColor: '#7F933A', height: 71, border: "1px solid", fontSize: "24px", marginBottom: '20px' }}
                         className="mt-3"
-                        type="login"
+                        type="text"
                         value={login}
                         placeholder="Введите логин..."
                         size="lg"
@@ -57,10 +56,11 @@ const UpdateUser = observer(() => {
                             type="submit"
                             size={"lg"}
                             variant={"outline-success"}
-                            style={{ fontWeight: 'bold', borderRadius: 37, width: '250px', height: '70px' }}
-                            onClick={updateUser}>
+                            style={{ fontWeight: 'bold', borderRadius: 37, width: '250px', height: '70px' }}>
                             Отправить
-                        </Button></p></Form>
+                        </Button>
+                    </p>
+                </Form>
             </Card>
 
             <Button

@@ -6,7 +6,7 @@ import { useLocation, useNavigate } from "react-router-dom";
 import { createTrains, deleteIDTrain, registration, updateUser } from '../http/userApi'
 import { Context } from "../index";
 import Modal from 'react-bootstrap/Modal';
-import { GETUSER_ROUTE } from "../utils/consts";
+import { GETUSER_ROUTE, UPDATE_ROUTE } from "../utils/consts";
 
 const AdminPage = observer(() => {
     document.body.style.backgroundColor = "#313131"
@@ -28,6 +28,7 @@ const AdminPage = observer(() => {
         try {
             const response = await registration(login, password)
             console.log({ message: 'Зарегался, молодец', response })
+            navigate(UPDATE_ROUTE)
         } catch (error) {
             alert(error)
         }

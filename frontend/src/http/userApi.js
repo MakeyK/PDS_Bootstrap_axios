@@ -36,23 +36,18 @@ export const deleteIDTrain = async (id_train1) => {
     }
 }
 
-export const updateUser = async (id_user, login, password) => {
+export const updateUser = async (login, password) => {
     try {
-        const token = localStorage.getItem("token");
-        if (!token) {
-            alert("Токен не найден");
+        if (!login && !password) {
+            console.log('Пусто', login, password)
             return;
         }
-        const { data } = await $host.patch(`/mak/rout/red/${id_user}`, {
-            login,
-            password
-        }, {
-            headers: {
-                Authorization: `Bearer ${token}`
-            }
-        });
+        const { data } = await $authHost.patch(`/mak/rout/red`, {
+            login, password
+        });   
         return data;
     } catch (error) {
-        alert(error.response.data.message)
+        console.error("Ошибка при обновлении пользователя:", error);
+        alert(error.response?.data?.message || "Произошла ошибка");
     }
 }
