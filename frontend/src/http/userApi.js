@@ -7,11 +7,11 @@ export const registration = async (login, password) => {
     return jwtDecode(data.token)
 }
 
-// export const logins = async (login, password) => {
-//     const { data } = await $host.post('login', { login, password })
-//     localStorage.setItem('token', data.token)
-//     return jwtDecode(data.token)
-// }
+export const logins = async (login, password) => {
+    const { data } = await $host.post('mak/rout/login', { login, password })
+    localStorage.setItem('token', data.token)
+    return jwtDecode(data.token)
+}
 
 export const createTrains = async (number_train, type_train) => {
     const { data } = await $host.post('mak/rout/createtrain', { number_train, type_train })

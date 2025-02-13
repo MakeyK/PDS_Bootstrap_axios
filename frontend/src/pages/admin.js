@@ -3,7 +3,7 @@ import { observer } from "mobx-react-lite";
 import { Card, Container, Form, Button } from 'react-bootstrap';
 import 'bootstrap/dist/css/bootstrap.min.css';
 import { useLocation, useNavigate } from "react-router-dom";
-import { createTrains, deleteIDTrain, registration, updateUser } from '../http/userApi'
+import { logins, createTrains, deleteIDTrain, registration, updateUser } from '../http/userApi'
 import { Context } from "../index";
 import Modal from 'react-bootstrap/Modal';
 import { GETUSER_ROUTE, UPDATE_ROUTE } from "../utils/consts";
@@ -87,7 +87,7 @@ const AdminPage = observer(() => {
                     <Form.Control
                         style={{ borderRadius: 70, backgroundColor: '#7F933A', height: 71, border: "1px solid", fontSize: "24px", marginBottom: '20px' }}
                         className="mt-3"
-                        placeholder="Выберите пароль..."
+                        placeholder="Введите пароль..."
                         type="password"
                         size="lg"
                         value={password}
@@ -95,7 +95,6 @@ const AdminPage = observer(() => {
 
                     <p style={{ marginTop: '30px', display: 'flex', justifyContent: 'center' }}>
                         <Button
-                            type="submit"
                             size={"lg"}
                             variant={"outline-success"}
                             style={{ fontWeight: 'bold', borderRadius: 37, width: '250px', height: '70px' }}
@@ -104,8 +103,6 @@ const AdminPage = observer(() => {
                         </Button></p>
                 </Form>
             </Card>
-
-
 
             <Card style={{ borderRadius: 80, fontFamily: "Play", backgroundColor: '#C9E956', marginTop: '60px', display: 'flex', justifyContent: 'center', alignItems: 'center' }} className="p-5 #FFFAF4">
                 <p style={{ fontSize: '24px' }}>Добавление данных о поезде в БД</p>

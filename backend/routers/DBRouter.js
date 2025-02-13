@@ -11,7 +11,7 @@ const AuthController = require('../controllers/AuthController')
 const db = require('../db')
 
 router.post('/registration', AuthController.registration)
-
+router.post('/login', AuthController.login)
 
 // Создание записей в таблицах
 router.post('/createuser', DBControllerUsers.createUsers)
