@@ -70,7 +70,8 @@ router.patch('/redtick/:id_ticket', DBControllerTickets.RedId)
 router.patch('/redv/:id_van', DBControllerVans.RedId)
 router.patch('/redstat/:id_station', DBControllerStations.RedId)
 
+// Обновление
 router.patch('/red', DBControllerUsers.updateUser)
-
+router.patch('/redpas', DBControllerPassengers.updatePassenger)
 
 module.exports = router

@@ -51,3 +51,19 @@ export const updateUser = async (login, password) => {
         alert(error.response?.data?.message || "Произошла ошибка");
     }
 }
+
+export const updatePassenger = async (first_name, last_name) => {
+    try {
+        if (!first_name && !last_name) {
+            console.log('Пусто', first_name, last_name)
+            return;
+        }
+        const { data } = await $authHost.patch(`/mak/rout/redpas`, {
+            first_name, last_name
+        });   
+        return data;
+    } catch (error) {
+        console.error("Ошибка при обновлении пользователя:", error);
+        alert(error.response?.data?.message || "Произошла ошибка");
+    }
+}

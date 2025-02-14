@@ -6,7 +6,7 @@ import { useLocation, useNavigate } from "react-router-dom";
 import { logins, createTrains, deleteIDTrain, registration, updateUser } from '../http/userApi'
 import { Context } from "../index";
 import Modal from 'react-bootstrap/Modal';
-import { GETUSER_ROUTE, UPDATE_ROUTE } from "../utils/consts";
+import { GETUSER_ROUTE, UPDATEPASSENGER_ROUTE, UPDATE_ROUTE } from "../utils/consts";
 
 const AdminPage = observer(() => {
     document.body.style.backgroundColor = "#313131"
@@ -59,6 +59,10 @@ const AdminPage = observer(() => {
 
     const update = async () => {
         navigate(UPDATE_ROUTE)
+    }
+
+    const updatepass = async () => {
+        navigate(UPDATEPASSENGER_ROUTE)
     }
 
     const UpdateUser = async (login, password) => {
@@ -153,8 +157,7 @@ const AdminPage = observer(() => {
                             size={"lg"}
                             variant={"outline-success"}
                             style={{ fontWeight: 'bold', borderRadius: 37, width: '180px', height: '70px' }}
-                            onClick={() => setShowModal(true)}
-                        >
+                            onClick={() => setShowModal(true)}>
                             Удалить
                         </Button></p>
                     <Modal style={{ fontFamily: 'Play' }} show={showModal} onHide={() => setShowModal(false)}>
@@ -213,7 +216,7 @@ const AdminPage = observer(() => {
                 </Form>
             </Card>
 
-            <Card style={{ borderRadius: 80, fontFamily: "Play", backgroundColor: '#C9E956', marginTop: '60px' }} className="p-5 #FFFAF4">
+            <Card style={{ borderRadius: 80, fontFamily: "Play", backgroundColor: '#C9E956', marginTop: '60px' }} className="p-3 #FFFAF4">
                 <p style={{ marginTop: '30px', display: 'flex', justifyContent: 'center' }}>
                     <Button
                         size={"lg"}
@@ -223,7 +226,7 @@ const AdminPage = observer(() => {
                         Перейти на страницу с выводом пользователей
                     </Button></p></Card>
 
-            <Card style={{ borderRadius: 80, fontFamily: "Play", backgroundColor: '#C9E956', marginTop: '60px' }} className="p-5 #FFFAF4">
+            <Card style={{ borderRadius: 80, fontFamily: "Play", backgroundColor: '#C9E956', marginTop: '60px' }} className="p-2 #FFFAF4">
                 <p style={{ marginTop: '30px', display: 'flex', justifyContent: 'center' }}>
                     <Button
                         size={"lg"}
@@ -231,6 +234,15 @@ const AdminPage = observer(() => {
                         style={{ fontWeight: 'bold', borderRadius: 37, width: '300px', height: '100px' }}
                         onClick={update}>
                         Обновить свои данные
+                    </Button></p></Card>
+
+            <Card style={{ borderRadius: 80, fontFamily: "Play", backgroundColor: '#C9E956', marginTop:'50px' }} className="p-2 #FFFAF4">
+                <p style={{ display: 'flex', justifyContent: 'center' }}>
+                    <Button
+                        size={"lg"}
+                        variant={"outline-success"}
+                        style={{ fontWeight: 'bold', borderRadius: 37, width: '250px', height: '70px', marginTop: "50px" }}
+                        onClick={updatepass}> Обновить личные данные
                     </Button></p></Card>
         </Container>
     );

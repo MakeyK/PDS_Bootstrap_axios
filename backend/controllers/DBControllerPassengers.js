@@ -57,6 +57,44 @@ class DBControllerUPassengers
         const redpas = await Passengers.update({title : req.body.title},{where:{id_passenger}})
         return res.json(redpas)
     }
+
+    // Обновление имя и фамилия пользователя по ID_user
+    async updatePassenger(req, res, next) {
+        try {
+            const { first_name, last_name } = req.body;
+            const token = req.headers.authorization?.split(' ')[1];
+            if (!token) {
+                return next(ApiError.badRequest('Токен не предоставлен'));
+            }
+            let decoded;
+            try {
+                decoded = jwt.verify(token, process.env.SECRET_KEY);
+            } catch (jwtError) {
+                console.error("Ошибка декодирования токена:", jwtError);
+                return next(ApiError.badRequest("Недействительный токен"));
+            }
+            const id_user = decoded.id_user;
+            const passenger = await Passengers.findOne({ where: { id_user } });
+            if (!passenger) {
+                return next(ApiError.notFound("Пассажир не найден"));
+            }
+            console.log("Полученные данные:", { first_name, last_name });
+            if (!first_name?.trim() && !last_name?.trim()) {
+                return next(ApiError.badRequest('Введите логин или пароль для обновления'));
+            }
+            if (first_name) {
+                passenger.first_name = first_name.trim();
+            }
+            if (last_name) {
+                passenger.last_name = last_name.trim();
+            }
+            await passenger.save();
+            return res.json({ message: 'Данные обновлены', passenger });
+        } catch (error) {
+            console.error("Ошибка при обновлении пользователя:", error);
+            return next(ApiError.badRequest("Ошибка при обновлении пользователя"));
+        }
+    }
 }
 
 module.exports = new DBControllerUPassengers()
