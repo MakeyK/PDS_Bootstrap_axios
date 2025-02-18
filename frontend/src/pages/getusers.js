@@ -20,7 +20,6 @@ const GetUsers = observer(() => {
     const getAllUsers = async () => {
         try {
             const response = await fetchAllUsers();
-            console.log({ message: "Вывод пользователей", response });
             UserRequest.setUserRequest(response);
         } catch (error) {
             alert(error);
@@ -45,7 +44,6 @@ const GetUsers = observer(() => {
             console.log('Пользователь авторизовался', response)
             user.setIsAuth(true)
             user.setUser()
-            navigate(UPDATE_ROUTE)
         } catch (error) {
             console.error("Ошибка при авторизации:", error)
         }
@@ -79,7 +77,7 @@ const GetUsers = observer(() => {
                             size={"lg"}
                             variant={"outline-success"}
                             style={{ fontWeight: 'bold', borderRadius: 37, width: '250px', height: '70px' }}
-                            onClick={logirov}>
+                            onClick={() => logirov(login, password)}>
                             Войти
                         </Button></p>
                 </Form>

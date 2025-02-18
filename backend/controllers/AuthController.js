@@ -38,7 +38,7 @@ class AuthController
   async login(req, res, next)
   {
     try {
-      const {login} = req.body
+      const {login, password} = req.body
       const user = await Users.findOne({where: {login}})
       if (!user)
       {

@@ -1,3 +1,4 @@
+import { responsivePropType } from "react-bootstrap/esm/createUtilityClasses";
 import { $authHost, $host } from "./index";
 import { jwtDecode } from 'jwt-decode';
 
@@ -16,6 +17,28 @@ export const logins = async (login, password) => {
 export const createTrains = async (number_train, type_train) => {
     const { data } = await $host.post('mak/rout/createtrain', { number_train, type_train })
     return data
+}
+
+export const createPassengers = async (first_name, last_name) => {
+    try {
+        const { data } = await $authHost.post('mak/rout/createpassenger', {
+            headers: { Authorization: `Bearer ${localStorage.getItem('token')}` },
+            data: { first_name: first_name, last_name: last_name }
+        })
+        return data
+    } catch (error) {
+        alert(error.response.data.message)
+        return
+    }
+}
+
+export const getAllPassengers = async () => {
+    try {
+        const { data } = await $host.get(`mak/rout/getallpassengers`)
+        return data
+    } catch (error) {
+        alert(error.response.data.message)
+    }
 }
 
 export const getAllUsers = async () => {
@@ -44,7 +67,7 @@ export const updateUser = async (login, password) => {
         }
         const { data } = await $authHost.patch(`/mak/rout/red`, {
             login, password
-        });   
+        });
         return data;
     } catch (error) {
         console.error("Ошибка при обновлении пользователя:", error);
@@ -60,7 +83,7 @@ export const updatePassenger = async (first_name, last_name) => {
         }
         const { data } = await $authHost.patch(`/mak/rout/redpas`, {
             first_name, last_name
-        });   
+        });
         return data;
     } catch (error) {
         console.error("Ошибка при обновлении пользователя:", error);

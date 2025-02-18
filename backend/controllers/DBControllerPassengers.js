@@ -10,12 +10,13 @@ class DBControllerUPassengers
     async createPassengers(req, res, next)
     {
         try {
-            const {first_name, last_name} = req.body
+            const {first_name, last_name} = req.body.data
+            const id_user = req.user.id_user
             if(!first_name||!last_name)
             {
                 return next(ApiError.badRequest("Введите полностью данные"))
             }
-            const createpas = await Passengers.create({first_name, last_name})
+            const createpas = await Passengers.create({id_user, first_name, last_name})
             return res.json({message: "Производитель создан"})
         } catch (error) {
             next(ApiError.badRequest("Что-то пошло не так"))
@@ -61,19 +62,9 @@ class DBControllerUPassengers
     // Обновление имя и фамилия пользователя по ID_user
     async updatePassenger(req, res, next) {
         try {
-            const { first_name, last_name } = req.body;
-            const token = req.headers.authorization?.split(' ')[1];
-            if (!token) {
-                return next(ApiError.badRequest('Токен не предоставлен'));
-            }
-            let decoded;
-            try {
-                decoded = jwt.verify(token, process.env.SECRET_KEY);
-            } catch (jwtError) {
-                console.error("Ошибка декодирования токена:", jwtError);
-                return next(ApiError.badRequest("Недействительный токен"));
-            }
-            const id_user = decoded.id_user;
+            const { first_name, last_name } = req.body.data
+
+            const id_user = req.user.id_user;
             const passenger = await Passengers.findOne({ where: { id_user } });
             if (!passenger) {
                 return next(ApiError.notFound("Пассажир не найден"));

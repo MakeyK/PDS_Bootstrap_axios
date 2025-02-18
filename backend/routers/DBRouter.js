@@ -1,5 +1,6 @@
 const Router = require('express')
 const router = new Router()
+const authMiddleware = require('../authMiddleware')
 const DBControllerUsers = require('../controllers/DBControllerUsers')
 const DBControllerPassengers = require('../controllers/DBControllerPassengers')
 const DBControllerSchedules = require('../controllers/DBControllerSchedules')
@@ -15,7 +16,7 @@ router.post('/login', AuthController.login)
 
 // Создание записей в таблицах
 router.post('/createuser', DBControllerUsers.createUsers)
-router.post('/createpassenger', DBControllerPassengers.createPassengers)
+router.post('/createpassenger', authMiddleware, DBControllerPassengers.createPassengers)
 router.post('/createschedule', DBControllerSchedules.createSchedules)
 router.post('/createtrain', DBControllerTrains.createTrains)
 router.post('/createticket', DBControllerTickets.createTickets)
@@ -23,8 +24,8 @@ router.post('/createvan', DBControllerVans.createVans)
 router.post('/createstation', DBControllerStations.createStations)
 
 // Выборка всех записей из таблицы
-router.get('/getallusers', DBControllerUsers.getAll)
-router.get('/getallpassengers', DBControllerPassengers.getAll)
+router.get('/getallusers', authMiddleware, DBControllerUsers.getAll)
+router.get('/getallpassengers', authMiddleware, DBControllerPassengers.getAll)
 router.get('/getallschedules', DBControllerSchedules.getAll)
 router.get('/getalltrains', DBControllerTrains.getAll)
 router.get('/getalltickets', DBControllerTickets.getAll)

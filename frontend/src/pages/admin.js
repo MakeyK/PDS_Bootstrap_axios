@@ -3,10 +3,13 @@ import { observer } from "mobx-react-lite";
 import { Card, Container, Form, Button } from 'react-bootstrap';
 import 'bootstrap/dist/css/bootstrap.min.css';
 import { useLocation, useNavigate } from "react-router-dom";
-import { logins, createTrains, deleteIDTrain, registration, updateUser } from '../http/userApi'
+import { logins, createTrains, deleteIDTrain, registration, updateUser, createPassengers } from '../http/userApi'
 import { Context } from "../index";
 import Modal from 'react-bootstrap/Modal';
 import { GETUSER_ROUTE, UPDATEPASSENGER_ROUTE, UPDATE_ROUTE } from "../utils/consts";
+import ButtonGroup from 'react-bootstrap/ButtonGroup';
+import ButtonToolbar from 'react-bootstrap/ButtonToolbar';
+
 
 const AdminPage = observer(() => {
     document.body.style.backgroundColor = "#313131"
@@ -23,6 +26,19 @@ const AdminPage = observer(() => {
     const [id_user, setIdUser] = useState('');
     const [newLogin, setNewLogin] = useState('');
     const [newPassword, setNewPassword] = useState('');
+    const [first_name, setFirstName] = useState('');
+    const [last_name, setLastName] = useState('');
+
+
+    const passengerpost = async (first_name, last_name) => {
+        try {
+            const response2 = await createPassengers(first_name, last_name)
+            console.log({ message: 'Пассажир добавлен', response2 })
+            return response2
+        } catch (error) {
+            alert(error)
+        }
+    }
 
     const click = async () => {
         try {
@@ -108,7 +124,7 @@ const AdminPage = observer(() => {
                 </Form>
             </Card>
 
-            <Card style={{ borderRadius: 80, fontFamily: "Play", backgroundColor: '#C9E956', marginTop: '60px', display: 'flex', justifyContent: 'center', alignItems: 'center' }} className="p-5 #FFFAF4">
+            {/* <Card style={{ borderRadius: 80, fontFamily: "Play", backgroundColor: '#C9E956', marginTop: '60px', display: 'flex', justifyContent: 'center', alignItems: 'center' }} className="p-5 #FFFAF4">
                 <p style={{ fontSize: '24px' }}>Добавление данных о поезде в БД</p>
                 <Form className="d-flex flex-column">
                     <Form.Control
@@ -136,11 +152,41 @@ const AdminPage = observer(() => {
                         >
                             Отправить
                         </Button></p>
-                </Form></Card>
+                </Form></Card> */}
 
+            <Card style={{ borderRadius: 80, fontFamily: "Play", backgroundColor: '#C9E956', marginTop: '60px' }} className="p-5 #FFFAF4">
+                <p style={{ fontSize: '24px' }}>Добавить о себе данные</p>
+                <Form className="d-flex flex-column">
+                    <Form.Control
+                        style={{ borderRadius: 70, backgroundColor: '#7F933A', height: 71, border: "1px solid", fontSize: "24px", marginBottom: '20px' }}
+                        className="mt-3"
+                        type="text"
+                        value={first_name}
+                        placeholder="Введите имя..."
+                        size="lg"
+                        onChange={e => setFirstName(e.target.value)} />
+                    <Form.Control
+                        style={{ borderRadius: 70, backgroundColor: '#7F933A', height: 71, border: "1px solid", fontSize: "24px", marginBottom: '20px' }}
+                        className="mt-3"
+                        placeholder="Введите фамилию..."
+                        size="lg"
+                        value={last_name}
+                        onChange={e => setLastName(e.target.value)} />
 
+                    <p style={{ marginTop: '30px', display: 'flex', justifyContent: 'center' }}>
+                        <Button
+                            type="submit"
+                            size={"lg"}
+                            variant={"outline-success"}
+                            style={{ fontWeight: 'bold', borderRadius: 37, width: '250px', height: '70px' }}
+                            onClick={() => passengerpost(first_name, last_name)}>
+                            Отправить данные
+                        </Button>
+                    </p>
+                </Form>
+            </Card>
 
-            <Card style={{ borderRadius: 80, fontFamily: "Play", backgroundColor: '#C9E956', marginTop: '60px', display: 'flex', justifyContent: 'center', alignItems: 'center' }} className="p-5 #FFFAF4">
+            {/* <Card style={{ borderRadius: 80, fontFamily: "Play", backgroundColor: '#C9E956', marginTop: '60px', display: 'flex', justifyContent: 'center', alignItems: 'center' }} className="p-5 #FFFAF4">
                 <p style={{ fontSize: '24px' }}>Удаление по ID поезда</p>
                 <Form className="d-flex flex-column">
                     <Form.Control
@@ -182,9 +228,9 @@ const AdminPage = observer(() => {
                             </Button>
                         </Modal.Footer>
                     </Modal>
-                </Form></Card>
+                </Form></Card> */}
 
-            <Card style={{ borderRadius: 80, fontFamily: "Play", backgroundColor: '#C9E956', marginTop: '60px', display: 'flex', justifyContent: 'center', alignItems: 'center' }} className="p-5 #FFFAF4">
+            {/* <Card style={{ borderRadius: 80, fontFamily: "Play", backgroundColor: '#C9E956', marginTop: '60px', display: 'flex', justifyContent: 'center', alignItems: 'center' }} className="p-5 #FFFAF4">
                 <p style={{ fontSize: '24px', color: 'purple', fontWeight: 'bold', textDecoration: 'underline' }}>Обновление пользователя по ID</p>
                 <Form>
                     <Form.Label style={{ fontSize: '24px' }}>ID пользователя</Form.Label>
@@ -214,36 +260,31 @@ const AdminPage = observer(() => {
                         Обновить пользователя
                     </Button>
                 </Form>
-            </Card>
+            </Card> */}
 
             <Card style={{ borderRadius: 80, fontFamily: "Play", backgroundColor: '#C9E956', marginTop: '60px' }} className="p-3 #FFFAF4">
-                <p style={{ marginTop: '30px', display: 'flex', justifyContent: 'center' }}>
+                <ButtonToolbar style={{ display: 'flex', justifyContent: 'center', alignItems: 'center' }}>
                     <Button
                         size={"lg"}
                         variant={"outline-success"}
-                        style={{ fontWeight: 'bold', borderRadius: 37, width: '300px', height: '100px' }}
+                        style={{ fontWeight: 'bold', borderRadius: 37, width: '300px', height: '100px', marginTop: '20px' }}
                         onClick={per}>
-                        Перейти на страницу с выводом пользователей
-                    </Button></p></Card>
-
-            <Card style={{ borderRadius: 80, fontFamily: "Play", backgroundColor: '#C9E956', marginTop: '60px' }} className="p-2 #FFFAF4">
-                <p style={{ marginTop: '30px', display: 'flex', justifyContent: 'center' }}>
+                        Перейти на страницу с выводом пользователей и авторизации
+                    </Button>
                     <Button
                         size={"lg"}
                         variant={"outline-success"}
-                        style={{ fontWeight: 'bold', borderRadius: 37, width: '300px', height: '100px' }}
+                        style={{ fontWeight: 'bold', borderRadius: 37, width: '300px', height: '100px', marginTop: '20px' }}
                         onClick={update}>
-                        Обновить свои данные
-                    </Button></p></Card>
-
-            <Card style={{ borderRadius: 80, fontFamily: "Play", backgroundColor: '#C9E956', marginTop:'50px' }} className="p-2 #FFFAF4">
-                <p style={{ display: 'flex', justifyContent: 'center' }}>
+                        Обновить свои данные в user
+                    </Button>
                     <Button
                         size={"lg"}
                         variant={"outline-success"}
-                        style={{ fontWeight: 'bold', borderRadius: 37, width: '250px', height: '70px', marginTop: "50px" }}
-                        onClick={updatepass}> Обновить личные данные
-                    </Button></p></Card>
+                        style={{ fontWeight: 'bold', borderRadius: 37, width: '300px', height: '70px', marginTop: '20px' }}
+                        onClick={updatepass}> Обновить личные данные в passenger
+                    </Button></ButtonToolbar></Card>
+
         </Container>
     );
 }
