@@ -22,15 +22,15 @@ const ListPassengers = observer(() => {
                 <ListGroup.Item key={data.id_user} style={{ backgroundColor: '#C9E956' }}>
                     <Col style={{
                         borderRadius: 100, fontFamily: "Play", backgroundColor: '#C9E956',
-                        maxHeight: "120px",
+                        maxHeight: "200px",
                         border: "2px solid black",
                         borderRadius: "10px",
                         marginTop: "10px",
                         overflow: 'hidden'
                     }}>
                         <div style={{ marginLeft: '20px', color: "black", fontSize: '20px' }}>ID_Пользователя <div style={{ color: 'purple' }}>{data.id_user}</div></div>
-                        <div style={{ marginLeft: '20px', color: "black", fontSize: '20px' }}>Логин <div style={{ color: 'purple' }}>{data.first_name}</div></div>
-                        <div style={{ marginLeft: '20px', color: "black", fontSize: '20px' }}>Логин <div style={{ color: 'purple' }}>{data.last_name}</div></div>
+                        <div style={{ marginLeft: '20px', color: "black", fontSize: '20px' }}>Имя<div style={{ color: 'purple' }}>{data.first_name}</div></div>
+                        <div style={{ marginLeft: '20px', color: "black", fontSize: '20px' }}>Фамилия<div style={{ color: 'purple' }}>{data.last_name}</div></div>
                     </Col>
                 </ListGroup.Item>
             ))

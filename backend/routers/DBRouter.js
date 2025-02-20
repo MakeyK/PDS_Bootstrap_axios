@@ -11,21 +11,22 @@ const DBControllerTickets = require('../controllers/DBCotrollerTickets')
 const AuthController = require('../controllers/AuthController')
 const db = require('../db')
 
+// Авторизация и регистрация
 router.post('/registration', AuthController.registration)
 router.post('/login', AuthController.login)
 
 // Создание записей в таблицах
 router.post('/createuser', DBControllerUsers.createUsers)
 router.post('/createpassenger', authMiddleware, DBControllerPassengers.createPassengers)
-router.post('/createschedule', DBControllerSchedules.createSchedules)
-router.post('/createtrain', DBControllerTrains.createTrains)
-router.post('/createticket', DBControllerTickets.createTickets)
-router.post('/createvan', DBControllerVans.createVans)
-router.post('/createstation', DBControllerStations.createStations)
+router.post('/createschedule', authMiddleware, DBControllerSchedules.createSchedules)
+router.post('/createtrain', authMiddleware, DBControllerTrains.createTrains)
+router.post('/createticket', authMiddleware, DBControllerTickets.createTickets)
+router.post('/createvan', authMiddleware, DBControllerVans.createVans)
+router.post('/createstation', authMiddleware, DBControllerStations.createStations)
 
 // Выборка всех записей из таблицы
-router.get('/getallusers', authMiddleware, DBControllerUsers.getAll)
-router.get('/getallpassengers', authMiddleware, DBControllerPassengers.getAll)
+router.get('/getallusers', DBControllerUsers.getAll)
+router.get('/getallpassengers', DBControllerPassengers.getAll)
 router.get('/getallschedules', DBControllerSchedules.getAll)
 router.get('/getalltrains', DBControllerTrains.getAll)
 router.get('/getalltickets', DBControllerTickets.getAll)
@@ -58,7 +59,6 @@ router.delete('/delftr', DBControllerTrains.DelFull)
 router.delete('/delftick', DBControllerTickets.DelFull)
 router.delete('/delfv', DBControllerVans.DelFull)
 router.delete('/delfstat', DBControllerStations.DelFull)
-
 router.delete('/del/:id_train', DBControllerTrains.DelId)
 router.delete('/del/:id_user', DBControllerUsers.DelId)
 
@@ -71,7 +71,7 @@ router.patch('/redtick/:id_ticket', DBControllerTickets.RedId)
 router.patch('/redv/:id_van', DBControllerVans.RedId)
 router.patch('/redstat/:id_station', DBControllerStations.RedId)
 
-// Обновление
+// Обновление данных
 router.patch('/red', DBControllerUsers.updateUser)
 router.patch('/redpas', DBControllerPassengers.updatePassenger)
 

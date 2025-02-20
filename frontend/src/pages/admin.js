@@ -155,7 +155,7 @@ const AdminPage = observer(() => {
                 </Form></Card> */}
 
             <Card style={{ borderRadius: 80, fontFamily: "Play", backgroundColor: '#C9E956', marginTop: '60px' }} className="p-5 #FFFAF4">
-                <p style={{ fontSize: '24px' }}>Добавить о себе данные</p>
+                <p style={{ fontSize: '24px' }}>Добавить личные данные</p>
                 <Form className="d-flex flex-column">
                     <Form.Control
                         style={{ borderRadius: 70, backgroundColor: '#7F933A', height: 71, border: "1px solid", fontSize: "24px", marginBottom: '20px' }}
@@ -267,22 +267,22 @@ const AdminPage = observer(() => {
                     <Button
                         size={"lg"}
                         variant={"outline-success"}
-                        style={{ fontWeight: 'bold', borderRadius: 37, width: '300px', height: '100px', marginTop: '20px' }}
+                        style={{ fontWeight: 'bold', borderRadius: 37, width: '300px', height: '70px', marginTop: '20px' }}
                         onClick={per}>
-                        Перейти на страницу с выводом пользователей и авторизации
-                    </Button>
-                    <Button
-                        size={"lg"}
-                        variant={"outline-success"}
-                        style={{ fontWeight: 'bold', borderRadius: 37, width: '300px', height: '100px', marginTop: '20px' }}
-                        onClick={update}>
-                        Обновить свои данные в user
+                        Вывод пользователей и авторизации
                     </Button>
                     <Button
                         size={"lg"}
                         variant={"outline-success"}
                         style={{ fontWeight: 'bold', borderRadius: 37, width: '300px', height: '70px', marginTop: '20px' }}
-                        onClick={updatepass}> Обновить личные данные в passenger
+                        onClick={update}>
+                        Обновить данные
+                    </Button>
+                    <Button
+                        size={"lg"}
+                        variant={"outline-success"}
+                        style={{ fontWeight: 'bold', borderRadius: 37, width: '300px', height: '70px', marginTop: '20px' }}
+                        onClick={updatepass}> Вывод пассажиров
                     </Button></ButtonToolbar></Card>
 
         </Container>

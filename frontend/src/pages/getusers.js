@@ -96,11 +96,11 @@ const GetUsers = observer(() => {
                         {showList ? "Скрыть пользователей" : "Вывести всех пользователей"}
                     </Button>
                 </p>
-            </Card>
+                </Card>
             {showList && UserRequest.getUserRequest() && UserRequest.getUserRequest().length > 0 ? (
                 <ListUser user={UserRequest.getUserRequest()} />
             ) : (
-                showList && <div>Недостаточно прав или нет пользователей!</div>
+                showList && <div style={{backgroundColor:"#C9E956", borderRadius: 37, marginTop: '30px', justifyContent:'center', display:'flex', alignItems:'center', fontSize:'24px'}}>Недостаточно прав или нет пользователей!</div>
             )}
 
             <Button

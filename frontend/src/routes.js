@@ -6,10 +6,10 @@ import UpdateUser from "./pages/update"
 import UpdatePassenger from "./pages/passenger"
 
 export const authRoutes = [
-    {
-        path: UPDATE_ROUTE,
-        Component: UpdateUser
-    }
+    // {
+    //     path: UPDATE_ROUTE,
+    //     Component: UpdateUser
+    // }
 ]
 
 export const publicRoutes = [
@@ -24,5 +24,9 @@ export const publicRoutes = [
     {
         path: UPDATEPASSENGER_ROUTE,
         Component: UpdatePassenger
+    },
+    {
+        path: UPDATE_ROUTE,
+        Component: UpdateUser
     }
 ]
