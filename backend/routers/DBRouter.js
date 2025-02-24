@@ -73,6 +73,6 @@ router.patch('/redstat/:id_station', DBControllerStations.RedId)
 
 // Обновление данных
 router.patch('/red', DBControllerUsers.updateUser)
-router.patch('/redpas', DBControllerPassengers.updatePassenger)
+router.patch('/redpassenger', authMiddleware, DBControllerPassengers.updatePassenger)
 
 module.exports = router

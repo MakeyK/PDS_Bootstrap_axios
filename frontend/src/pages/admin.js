@@ -284,7 +284,6 @@ const AdminPage = observer(() => {
                         style={{ fontWeight: 'bold', borderRadius: 37, width: '300px', height: '70px', marginTop: '20px' }}
                         onClick={updatepass}> Вывод пассажиров
                     </Button></ButtonToolbar></Card>
-
         </Container>
     );
 }

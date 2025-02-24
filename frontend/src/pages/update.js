@@ -3,7 +3,7 @@ import { observer } from "mobx-react-lite";
 import { Card, Container, Button, Form } from 'react-bootstrap';
 import 'bootstrap/dist/css/bootstrap.min.css';
 import { useNavigate } from "react-router-dom";
-import { updateUser, } from '../http/userApi';
+import { updateUser, updatePassenger } from '../http/userApi';
 import { Context } from "../index";
 import { ADMIN_ROUTE } from "../utils/consts";
 
@@ -19,16 +19,6 @@ const UpdateUser = observer(() => {
     const per = () => {
         navigate(ADMIN_ROUTE);
     };
-    const updatePassenger = async (e) => {
-        e.preventDefault();
-        try {
-            console.log('Какие данные получили', first_name, last_name);
-            const response = await updatePassenger(first_name, last_name);
-            console.log("После запроса", first_name, last_name, response);
-        } catch (error) {
-            console.error("Ошибка при обновлении пользователя:", error);
-        }
-    };
 
     const UpdateUser = async (e) => {
         e.preventDefault();
@@ -38,7 +28,16 @@ const UpdateUser = observer(() => {
             console.error("Ошибка при обновление пользователя:", error);
         }
     };
-
+    
+    const UpdatePassenger = async (e) => {
+        e.preventDefault();
+        try {
+            const response = await updatePassenger(first_name, last_name);
+            console.log("Ответ от сервера:", response);
+        } catch (error) {
+            console.error("Ошибка при обновлении пассажира:", error);
+        }
+    };
     return (
         <Container style={{ backgroundColor: '#313131', borderRadius: '15px', marginTop: '6px', fontFamily: "Play", width: '500px' }}>
             <Card style={{ borderRadius: 80, fontFamily: "Play", backgroundColor: '#C9E956', marginTop: '60px' }} className="p-5 #FFFAF4">
@@ -74,7 +73,7 @@ const UpdateUser = observer(() => {
             </Card>
             <Card style={{ borderRadius: 80, fontFamily: "Play", backgroundColor: '#C9E956', marginTop: '60px' }} className="p-5 #FFFAF4">
                 <p style={{ fontSize: '24px' }}>Обновить личные данные</p>
-                <Form className="d-flex flex-column" onSubmit={updatePassenger}>
+                <Form className="d-flex flex-column" onSubmit={UpdatePassenger}>
                     <Form.Control
                         style={{ borderRadius: 70, backgroundColor: '#7F933A', height: 71, border: "1px solid", fontSize: "24px", marginBottom: '20px' }}
                         className="mt-3"
@@ -82,14 +81,14 @@ const UpdateUser = observer(() => {
                         value={first_name}
                         placeholder="Введите новое имя..."
                         size="lg"
-                        onChange={e => setFirstName(e.target.value)} />
+                        onChange={(e) => setFirstName(e.target.value)} />
                     <Form.Control
                         style={{ borderRadius: 70, backgroundColor: '#7F933A', height: 71, border: "1px solid", fontSize: "24px", marginBottom: '20px' }}
                         className="mt-3"
                         placeholder="Введите новую фамилию..."
                         size="lg"
                         value={last_name}
-                        onChange={e => setLastName(e.target.value)} />
+                        onChange={(e) => setLastName(e.target.value)} />
                     <p style={{ marginTop: '30px', display: 'flex', justifyContent: 'center' }}>
                         <Button
                             type="submit"

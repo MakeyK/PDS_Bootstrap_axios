@@ -62,7 +62,7 @@ export const deleteIDTrain = async (id_train1) => {
 export const updateUser = async (login, password) => {
     try {
         if (!login && !password) {
-            console.log('Пусто', login, password)
+            console.log('Данные:', login, password)
             return;
         }
         const { data } = await $authHost.patch(`/mak/rout/red`, {
@@ -78,15 +78,19 @@ export const updateUser = async (login, password) => {
 export const updatePassenger = async (first_name, last_name) => {
     try {
         if (!first_name && !last_name) {
-            console.log('Пусто', first_name, last_name)
+            console.log('Данные:', first_name, last_name);
             return;
         }
-        const { data } = await $authHost.patch(`/mak/rout/redpas`, {
-            first_name, last_name
+        const { data } = await $authHost.patch('/mak/rout/redpassenger', {
+            data: {
+                first_name,
+                last_name
+            },
+            headers: {Authorization: `Bearer ${localStorage.getItem('token')}`}
         });
         return data;
     } catch (error) {
-        console.error("Ошибка при обновлении пользователя:", error);
+        console.error("Ошибка при обновлении пассажира:", error);
         alert(error.response?.data?.message || "Произошла ошибка");
     }
 }
