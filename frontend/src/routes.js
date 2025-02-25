@@ -6,7 +6,7 @@ import UpdateUser from "./pages/update"
 import UpdatePassenger from "./pages/passenger"
 import Registration from "./pages/registration"
 import PostPassenger from "./pages/postPas"
-
+import Login from './pages/login'
 
 export const authRoutes = [
     // {
@@ -36,10 +36,10 @@ export const publicRoutes = [
         path: REGISTRATION_ROUTE,
         Component: Registration
     },
-    // {
-    //     path: LOGIN_ROUTE,
-    //     Component: Login
-    // }
+    {
+        path: LOGIN_ROUTE,
+        Component: Login
+    },
     {
         path: POSTPASSNGER_ROUTE,
         Component: PostPassenger

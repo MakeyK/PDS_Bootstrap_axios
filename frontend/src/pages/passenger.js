@@ -6,7 +6,7 @@ import { useNavigate } from "react-router-dom";
 import { getAllPassengers } from '../http/userApi';
 import { Context } from "../index";
 import { ADMIN_ROUTE } from "../utils/consts";
-import ListPassengers from "./ListPassengers";
+import ListPassengers from "../components/ListPassengers";
 
 const UpdatePassenger = observer(() => {
     document.body.style.backgroundColor = "#313131";

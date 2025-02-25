@@ -5,7 +5,7 @@ import 'bootstrap/dist/css/bootstrap.min.css';
 import { useLocation, useNavigate } from "react-router-dom";
 import { createPassengers } from '../http/userApi'
 import { Context } from "../index";
-import { UPDATE_ROUTE } from "../utils/consts";
+import { UPDATE_ROUTE, ADMIN_ROUTE } from "../utils/consts";
 
 const PostPassenger = observer(() => {
     document.body.style.backgroundColor = "#313131"
@@ -30,6 +30,9 @@ const PostPassenger = observer(() => {
     const update = async () => {
         navigate(UPDATE_ROUTE)
     }
+    const per = () => {
+        navigate(ADMIN_ROUTE);
+    };
 
     return (
         <Container style={{ backgroundColor: '#313131', borderRadius: '15px', marginTop: '6px', fontFamily: "Play", width: '500px' }}>
@@ -67,9 +70,15 @@ const PostPassenger = observer(() => {
             <Button
                 size={"lg"}
                 variant={"outline-success"}
-                style={{ fontWeight: 'bold', borderRadius: 37, width: '300px', height: '70px', marginTop: '30px', marginLeft:'90px' }}
+                style={{ fontWeight: 'bold', borderRadius: 37, width: '300px', height: '70px', marginTop: '30px', marginLeft: '90px' }}
                 onClick={update}>
                 Обновить данные
+            </Button>
+            <Button
+                size={"lg"}
+                variant={"success"}
+                style={{ fontWeight: 'bold', borderRadius: 37, width: '250px', height: '70px', marginTop: "50px", marginLeft: '120px' }}
+                onClick={per}> Вернуться обратно
             </Button>
         </Container>
     );

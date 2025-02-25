@@ -5,7 +5,7 @@ import 'bootstrap/dist/css/bootstrap.min.css';
 import { useNavigate } from "react-router-dom";
 import { updateUser, updatePassenger } from '../http/userApi';
 import { Context } from "../index";
-import { ADMIN_ROUTE } from "../utils/consts";
+import { ADMIN_ROUTE, POSTPASSNGER_ROUTE } from "../utils/consts";
 
 const UpdateUser = observer(() => {
     document.body.style.backgroundColor = "#313131";
@@ -19,6 +19,9 @@ const UpdateUser = observer(() => {
     const per = () => {
         navigate(ADMIN_ROUTE);
     };
+    const per1 = () => {
+        navigate(POSTPASSNGER_ROUTE);
+    };
 
     const UpdateUser = async (e) => {
         e.preventDefault();
@@ -28,7 +31,7 @@ const UpdateUser = observer(() => {
             console.error("Ошибка при обновление пользователя:", error);
         }
     };
-    
+
     const UpdatePassenger = async (e) => {
         e.preventDefault();
         try {
@@ -71,6 +74,7 @@ const UpdateUser = observer(() => {
                     </p>
                 </Form>
             </Card>
+
             <Card style={{ borderRadius: 80, fontFamily: "Play", backgroundColor: '#C9E956', marginTop: '60px' }} className="p-5 #FFFAF4">
                 <p style={{ fontSize: '24px' }}>Обновить личные данные</p>
                 <Form className="d-flex flex-column" onSubmit={UpdatePassenger}>
@@ -99,6 +103,12 @@ const UpdateUser = observer(() => {
                         </Button></p>
                 </Form>
             </Card>
+            <Button
+                size={"lg"}
+                variant={"success"}
+                style={{ fontWeight: 'bold', borderRadius: 37, width: '250px', height: '70px', marginTop: "50px", marginLeft: '120px' }}
+                onClick={per1}> Добавить данные о себе
+            </Button>
 
             <Button
                 size={"lg"}
