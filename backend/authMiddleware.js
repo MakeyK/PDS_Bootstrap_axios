@@ -5,7 +5,7 @@ module.exports = function (req, res, next) {
         next()
     }
     try {
-        const token = req.headers.authorization.split(' ')[1] // Bearer token
+        const token = req.headers.authorization.split(' ')[1]
         if (!token) {
             return res.status(401).json({ message: "Не авторизован" })
         }
@@ -13,6 +13,6 @@ module.exports = function (req, res, next) {
         req.user = decoded
         next()
     } catch (e) {   
-        res.status(401).json({ message: "Не авторизован, бывает" })
+        res.status(401).json({ message: "Ошибка" })
     }
 };

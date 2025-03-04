@@ -1,17 +1,18 @@
 import { Component } from "react"
 import Admin from "./pages/admin"
-import {ADMIN_ROUTE, GETUSER_ROUTE, LOGIN_ROUTE, POSTPASSNGER_ROUTE, REGISTRATION_ROUTE, UPDATEPASSENGER_ROUTE, UPDATE_ROUTE } from "./utils/consts"
+import {ADMIN_ROUTE, GETUSER_ROUTE, LOGIN_ROUTE, POSTPASSNGER_ROUTE, ADMINPANEL_ROUTE, REGISTRATION_ROUTE, UPDATEPASSENGER_ROUTE, UPDATE_ROUTE } from "./utils/consts"
 import GetUsers from "./pages/getusers"
 import UpdateUser from "./pages/update"
 import UpdatePassenger from "./pages/passenger"
 import Registration from "./pages/registration"
 import PostPassenger from "./pages/postPas"
 import Login from './pages/login'
+import AdminPanel from "./pages/adminpanel"
 
 export const authRoutes = [
     // {
-    //     path: UPDATE_ROUTE,
-    //     Component: UpdateUser
+    //     path: ADMINPANEL_ROUTE,
+    //     Component: AdminPanel
     // }
 ]
 
@@ -43,5 +44,9 @@ export const publicRoutes = [
     {
         path: POSTPASSNGER_ROUTE,
         Component: PostPassenger
+    },
+    {
+        path: ADMINPANEL_ROUTE,
+        Component: AdminPanel
     }
 ]

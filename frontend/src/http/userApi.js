@@ -15,7 +15,7 @@ export const logins = async (login, password) => {
 }
 
 export const createTrains = async (number_train, type_train) => {
-    const { data } = await $host.post('mak/rout/createtrain', { number_train, type_train })
+    const { data } = await $authHost.post('mak/rout/createtrain', { number_train, type_train })
     return data
 }
 
@@ -52,7 +52,17 @@ export const getAllUsers = async () => {
 
 export const deleteIDTrain = async (id_train1) => {
     try {
-        const { data } = await $host.delete(`mak/rout/del/${id_train1}`)
+        const { data } = await $authHost.delete(`mak/rout/del/${id_train1}`)
+        console.log(data)
+        return data
+    } catch (error) {
+        alert(error.response.data.message)
+    }
+}
+
+export const deleteIDUser = async (id_user) => {
+    try {
+        const { data } = await $authHost.delete(`mak/rout/delus/${id_user}`)
         return data
     } catch (error) {
         alert(error.response.data.message)

@@ -36,9 +36,37 @@ class DBControllerUsers {
 
     // Удаление по выбранному ID таблицы Users
     async DelId(req, res) {
-        const { id_user } = req.params;
-        let delid = await Users.destroy({ where: { id_user } });
-        return res.json(delid);
+        try {
+            const user = await Users.findByPk(req.params.id_user);
+            const userRole = req.user.role;
+            if (!user) {
+                return res.status(404).json({
+                    error: "Пользователь не найден",
+                });
+            }
+            if (!user) {
+                if (userRole === 'user') {
+                    console.log(req.user.id_user);
+                    console.log(userRole);
+                    if (req.params.id_user !== req.user.id_user) {
+                        return res.status(403).json({ message: 'Нет доступа' });
+                    }
+                }
+                return res.status(404).json({
+                    error: "Пользователь не найден",
+                });
+            }
+            const deleteClient = await Users.destroy({ where: { id_user: req.params.id_user } });
+            res.json({ deleteClient });
+            if (deleteClient === 0) {
+                return res.status(404).json({ message: 'Пользователь не найден для удаления' });
+            }
+        } catch (error) {
+            console.log(error);
+            res.status(500).json({
+                error: "Удаление не было выполнено",
+            });
+        }
     }
 
     // Удаление всех записей в таблице Users

@@ -6,7 +6,7 @@ const Users = sequelize.define('users', {
     id_user: { type: DataTypes.UUID, primaryKey: true, defaultValue: UUIDV4 },
     login: { type: DataTypes.STRING },
     password: { type: DataTypes.STRING },
-    role: { type: DataTypes.STRING, defaultValue: "user" }
+    role: { type: DataTypes.STRING }
 }, { timestamps: false });
 
 const Stations = sequelize.define('stations', {

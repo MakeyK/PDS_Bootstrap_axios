@@ -31,7 +31,6 @@ app.use((req, res, next) => {
         }
         originalSend.call(this, body);
     };
-
     next();
 });
 

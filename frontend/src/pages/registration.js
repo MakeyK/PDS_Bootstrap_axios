@@ -3,36 +3,38 @@ import { observer } from "mobx-react-lite";
 import { Card, Container, Form, Button } from 'react-bootstrap';
 import 'bootstrap/dist/css/bootstrap.min.css';
 import { useLocation, useNavigate } from "react-router-dom";
-import {registration} from '../http/userApi'
+import { registration } from '../http/userApi';
 import { Context } from "../index";
 import { UPDATE_ROUTE } from "../utils/consts";
 
 const Registration = observer(() => {
     document.body.style.backgroundColor = "#313131"
-    const { UserRequest } = useContext(Context)
-    const navigate = useNavigate()
-    const [login, setLogin] = useState('')
-    const [password, setPassword] = useState('')
-    const location = useLocation()
+    const { UserRequest } = useContext(Context);
+    const navigate = useNavigate();
+    const [login, setLogin] = useState('');
+    const [password, setPassword] = useState('');
+    const [secretKey, setSecretKey] = useState('');
+    const location = useLocation();
 
     const click = async () => {
         try {
-            const response = await registration(login, password)
-            console.log({ message: 'Зарегался, молодец', response })
-            navigate(UPDATE_ROUTE)
+            const response = await registration(login, password, secretKey);
+            console.log({ message: 'Зарегался, молодец', response });
+            navigate(UPDATE_ROUTE);
         } catch (error) {
-            alert(error)
+            alert(error);
         }
-    }
+    };
+    
 
     return (
         <Container
-            style={{ backgroundColor: '#313131', borderRadius: '15px', marginTop: '6px', fontFamily: "Play", width: '500px' }}>
+            style={{ backgroundColor: '#313131', borderRadius: '15px', marginTop: '6px', fontFamily: "Play", width: '700px' }}>
             <Card style={{ borderRadius: 80, fontFamily: "Play", backgroundColor: '#C9E956', marginTop: '60px', display: 'flex', justifyContent: 'center', alignItems: 'center' }} className="p-5 #FFFAF4">
                 <p style={{ fontSize: '24px' }}>Регистрация</p>
                 <Form className="d-flex flex-column">
                     <Form.Control
-                        style={{ borderRadius: 70, backgroundColor: '#7F933A', height: 71, border: "1px solid", fontSize: "24px", marginBottom: '20px' }}
+                        style={{ borderRadius: 70, width: '500px', backgroundColor: '#7F933A', height: 71, border: "1px solid", fontSize: "24px", marginBottom: '20px' }}
                         className="mt-3"
                         type="login"
                         value={login}
@@ -47,7 +49,14 @@ const Registration = observer(() => {
                         size="lg"
                         value={password}
                         onChange={e => setPassword(e.target.value)} />
-
+                    <Form.Control
+                        style={{ borderRadius: 70, backgroundColor: '#7F933A', height: 71, border: "1px solid", fontSize: "24px", marginBottom: '20px' }}
+                        className="mt-3"
+                        placeholder="Введите секретный ключ (если есть)..."
+                        type="text"
+                        size="lg"
+                        value={secretKey}
+                        onChange={e => setSecretKey(e.target.value)} />
                     <p style={{ marginTop: '30px', display: 'flex', justifyContent: 'center' }}>
                         <Button
                             size={"lg"}
@@ -55,12 +64,12 @@ const Registration = observer(() => {
                             style={{ fontWeight: 'bold', borderRadius: 37, width: '250px', height: '70px' }}
                             onClick={click}>
                             Зарегистрироваться
-                        </Button></p>
+                        </Button>
+                    </p>
                 </Form>
             </Card>
         </Container>
     );
-}
-);
+});
 
 export default Registration;

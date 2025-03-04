@@ -1,7 +1,7 @@
 import React, { useContext } from "react"; 
 import {Routes, Route, Navigate} from 'react-router-dom'  
 import { authRoutes, publicRoutes } from "../routes"; 
-import {ADMIN_ROUTE, GETUSER_ROUTE, LOGIN_ROUTE, POSTPASSNGER_ROUTE, REGISTRATION_ROUTE, UPDATE_ROUTE, UPDATEPASSENGER_ROUTE} from "../utils/consts"; 
+import {ADMIN_ROUTE, ADMINPANEL_ROUTE, GETUSER_ROUTE, LOGIN_ROUTE, POSTPASSNGER_ROUTE, REGISTRATION_ROUTE, UPDATE_ROUTE, UPDATEPASSENGER_ROUTE} from "../utils/consts"; 
 import { Context } from "../index"; 
 
 const AppRouter = () => { 
@@ -56,6 +56,11 @@ const AppRouter = () => {
     <Route>
         {publicRoutes.map(({path, Component}) =>
         <Route  path="*" element = {<Navigate> to={POSTPASSNGER_ROUTE}</Navigate>} replace/>
+    )} 
+    </Route>
+    <Route>
+        {publicRoutes.map(({path, Component}) =>
+        <Route  path="*" element = {<Navigate> to={ADMINPANEL_ROUTE}</Navigate>} replace/>
     )} 
     </Route>
     </Routes> 

@@ -22,7 +22,7 @@ const ListUser = observer(() => {
                 <ListGroup.Item key={data.id_user} style={{ backgroundColor: '#C9E956' }}>
                     <Col style={{
                         borderRadius: 100, fontFamily: "Play", backgroundColor: '#C9E956',
-                        maxHeight: "120px",
+                        maxHeight: "200px",
                         border: "2px solid black",
                         borderRadius: "10px",
                         marginTop: "10px",
@@ -30,6 +30,7 @@ const ListUser = observer(() => {
                     }}>
                         <div style={{ marginLeft: '20px', color: "black", fontSize: '20px' }}>ID_Пользователя <div style={{ color: 'purple' }}>{data.id_user}</div></div>
                         <div style={{ marginLeft: '20px', color: "black", fontSize: '20px' }}>Логин <div style={{ color: 'purple' }}>{data.login}</div></div>
+                        <div style={{ marginLeft: '20px', color: "black", fontSize: '20px' }}>Роль <div style={{ color: 'purple' }}>{data.role}</div></div>
                     </Col>
                 </ListGroup.Item>
             ))
