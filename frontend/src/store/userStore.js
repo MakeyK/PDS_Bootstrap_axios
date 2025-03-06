@@ -19,4 +19,7 @@ export default class UserStore
     getUser() {
         return this._user
     }
+    get user() {
+        return this._user;
+    }
 }

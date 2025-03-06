@@ -22,7 +22,7 @@ class AuthController {
         return next(ApiError.badRequest('Пользователь с таким login уже существует'));
       }
       let role = 'user';
-      if (secretKey === 'qwe123') {
+      if (secretKey === 'MakeyK') {
         role = 'admin';
       }
       const user = await Users.create({ login, password, role });

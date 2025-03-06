@@ -2,10 +2,10 @@ import { responsivePropType } from "react-bootstrap/esm/createUtilityClasses";
 import { $authHost, $host } from "./index";
 import { jwtDecode } from 'jwt-decode';
 
-export const registration = async (login, password) => {
-    const { data } = await $host.post('mak/rout/registration', { login, password })
-    localStorage.setItem('token', data.token)
-    return jwtDecode(data.token)
+export const registration = async (login, password, secretKey) => {
+    const { data } = await $host.post('mak/rout/registration', { login, password, secretKey });
+    localStorage.setItem('token', data.token);
+    return jwtDecode(data.token);
 }
 
 export const logins = async (login, password) => {
