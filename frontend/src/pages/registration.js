@@ -5,12 +5,12 @@ import 'bootstrap/dist/css/bootstrap.min.css';
 import { useLocation, useNavigate } from "react-router-dom";
 import { registration } from '../http/userApi';
 import { Context } from "../index";
-import { UPDATE_ROUTE } from "../utils/consts";
+import { ADMINPANEL_ROUTE, UPDATE_ROUTE } from "../utils/consts";
 
 const Registration = observer(() => {
     document.body.style.backgroundColor = "#313131"
-    const { UserRequest } = useContext(Context);
     const navigate = useNavigate();
+    const { user } = useContext(Context)
     const [login, setLogin] = useState('');
     const [password, setPassword] = useState('');
     const [secretKey, setSecretKey] = useState('');
@@ -20,9 +20,14 @@ const Registration = observer(() => {
         try {
             const response = await registration(login, password, secretKey);
             console.log({ message: 'Зарегался, молодец', response });
-            navigate(UPDATE_ROUTE);
+            user.setIsAuth(true);
+            user.setUser(response.user)
+
+            console.log(user.getisAuth());
+            console.log(user.getUser());
+            navigate(ADMINPANEL_ROUTE);
         } catch (error) {
-            alert(error);
+            alert(error.response?.data?.message || error.message);
         }
     };
     

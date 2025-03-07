@@ -25,7 +25,7 @@ export const authRoutes = [
     {
         path: UPDATE_ROUTE,
         Component: <UpdateUser />
-    },
+    }
 ]
 
 export const publicRoutes = [
@@ -36,7 +36,7 @@ export const publicRoutes = [
     {
         path: LOGIN_ROUTE,
         Component: <Login />
-    },
+    }
     // {
     //     path: ADMIN_ROUTE,
     //     Component: Admin
