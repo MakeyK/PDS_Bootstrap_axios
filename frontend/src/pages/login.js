@@ -6,7 +6,8 @@ import { useNavigate } from "react-router-dom";
 import { getAllUsers as fetchAllUsers, logins } from '../http/userApi';
 import { Context } from "../index";
 import ListUser from "../components/listUsers";
-import { ADMIN_ROUTE, POSTPASSNGER_ROUTE, UPDATE_ROUTE } from "../utils/consts";
+import { ADMIN_ROUTE } from "../utils/consts";
+import NavBar2 from "../components/NavBar2";
 
 const Login = observer(() => {
     document.body.style.backgroundColor = "#313131";
@@ -16,24 +17,24 @@ const Login = observer(() => {
     const [login, setLogin] = useState('')
     const [password, setPassword] = useState('')
 
-    const logirov = async (login2, password2) => {
+    const logirov = async () => {
         try {
-            const response = await logins(login2, password2)
-            console.log('Пользователь авторизовался', response)
-            user.setIsAuth(true)
-            user.setUser()
-            navigate(POSTPASSNGER_ROUTE)
+            const response = await logins(login, password)
+            console.log(localStorage.getItem("token"))
+            if (!response) return
+            navigate(ADMIN_ROUTE)
         } catch (error) {
-            console.error("Ошибка при авторизации:", error)
+            console.log(error)
+            alert(error)
         }
     }
     return (
-        <Container style={{ backgroundColor: '#313131', borderRadius: '15px', marginTop: '6px', fontFamily: "Play", width: '500px' }}>
+        <Container style={{ backgroundColor: '#313131', borderRadius: '15px', marginTop: '130px', fontFamily: "Play", width: '600px' }}>
             <Card style={{ borderRadius: 80, fontFamily: "Play", backgroundColor: '#C9E956', marginTop: '60px', display: 'flex', justifyContent: 'center', alignItems: 'center' }} className="p-5 #FFFAF4">
                 <p style={{ fontSize: '24px' }}>Авторизация</p>
                 <Form className="d-flex flex-column">
                     <Form.Control
-                        style={{ borderRadius: 70, backgroundColor: '#7F933A', height: 71, border: "1px solid", fontSize: "24px", marginBottom: '20px' }}
+                        style={{ borderRadius: 70, width: '400px', backgroundColor: '#7F933A', height: 71, border: "1px solid", fontSize: "24px", marginBottom: '20px' }}
                         className="mt-3"
                         type="login"
                         value={login}
@@ -55,11 +56,11 @@ const Login = observer(() => {
                             size={"lg"}
                             variant={"outline-success"}
                             style={{ fontWeight: 'bold', borderRadius: 37, width: '250px', height: '70px' }}
-                            onClick={() => logirov(login, password)}>
+                            onClick={logirov}>
                             Войти
                         </Button></p>
                 </Form>
-            </Card>
+            </Card><NavBar2 />
         </Container>
     );
 });

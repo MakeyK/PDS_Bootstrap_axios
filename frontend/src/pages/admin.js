@@ -7,7 +7,7 @@ import { createTrains } from '../http/userApi'
 import { Context } from "../index";
 import { GETUSER_ROUTE, UPDATEPASSENGER_ROUTE, UPDATE_ROUTE } from "../utils/consts";
 import ButtonToolbar from 'react-bootstrap/ButtonToolbar';
-
+import NavBar from "../components/NavBar";
 
 const AdminPage = observer(() => {
     document.body.style.backgroundColor = "#313131"
@@ -37,7 +37,7 @@ const AdminPage = observer(() => {
 
     return (
         <Container
-            style={{ backgroundColor: '#313131', borderRadius: '15px', marginTop: '6px', fontFamily: "Play", width: '500px' }}>
+            style={{ backgroundColor: '#313131', borderRadius: '15px', marginTop: '200px', fontFamily: "Play", width: '500px' }}>
 
             <Card style={{ borderRadius: 80, fontFamily: "Play", backgroundColor: '#C9E956', marginTop: '60px', display: 'flex', justifyContent: 'center', alignItems: 'center' }} className="p-5 #FFFAF4">
                 <p style={{ fontSize: '24px' }}>Добавление данных о поезде в БД</p>
@@ -83,7 +83,7 @@ const AdminPage = observer(() => {
                         variant={"outline-success"}
                         style={{ fontWeight: 'bold', borderRadius: 37, width: '300px', height: '70px', marginTop: '20px' }}
                         onClick={updatepass}> Вывод пассажиров
-                    </Button></ButtonToolbar></Card>
+                    </Button></ButtonToolbar></Card><NavBar/>
         </Container>
     );
 }

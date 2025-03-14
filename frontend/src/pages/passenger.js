@@ -7,6 +7,7 @@ import { getAllPassengers } from '../http/userApi';
 import { Context } from "../index";
 import { ADMIN_ROUTE } from "../utils/consts";
 import ListPassengers from "../components/ListPassengers";
+import NavBar from "../components/NavBar";
 
 const UpdatePassenger = observer(() => {
     document.body.style.backgroundColor = "#313131";
@@ -35,7 +36,7 @@ const UpdatePassenger = observer(() => {
     };
 
     return (
-        <Container style={{ backgroundColor: '#313131', borderRadius: '15px', marginTop: '6px', fontFamily: "Play", width: '500px' }}>
+        <Container style={{ backgroundColor: '#313131', borderRadius: '15px', marginTop: '200px', fontFamily: "Play", width: '500px' }}>
             <Card style={{ borderRadius: 80, fontFamily: "Play", backgroundColor: '#C9E956', marginTop: '60px' }} className="p-5">
                 <p style={{ fontSize: '24px' }}>Вывод всех пассажиров</p>
                 <p style={{ marginTop: '30px', display: 'flex', justifyContent: 'center' }}>
@@ -58,7 +59,7 @@ const UpdatePassenger = observer(() => {
                 variant={"success"}
                 style={{ fontWeight: 'bold', borderRadius: 37, width: '250px', height: '70px', marginTop: "50px", marginLeft: '120px' }}
                 onClick={per}> Вернуться обратно
-            </Button>
+            </Button><NavBar/>
         </Container>
     );
 });

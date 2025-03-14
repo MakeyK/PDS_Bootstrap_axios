@@ -5,7 +5,8 @@ import 'bootstrap/dist/css/bootstrap.min.css';
 import { useLocation, useNavigate } from "react-router-dom";
 import { registration } from '../http/userApi';
 import { Context } from "../index";
-import { ADMINPANEL_ROUTE, UPDATE_ROUTE } from "../utils/consts";
+import { ADMIN_ROUTE, ADMINPANEL_ROUTE, UPDATE_ROUTE } from "../utils/consts";
+import NavBar2 from "../components/NavBar2";
 
 const Registration = observer(() => {
     document.body.style.backgroundColor = "#313131"
@@ -25,16 +26,16 @@ const Registration = observer(() => {
 
             console.log(user.getisAuth());
             console.log(user.getUser());
-            navigate(ADMINPANEL_ROUTE);
+            navigate(ADMIN_ROUTE);
         } catch (error) {
             alert(error.response?.data?.message || error.message);
         }
     };
-    
+
 
     return (
         <Container
-            style={{ backgroundColor: '#313131', borderRadius: '15px', marginTop: '6px', fontFamily: "Play", width: '700px' }}>
+            style={{ backgroundColor: '#313131', borderRadius: '15px', marginTop: '130px', fontFamily: "Play", width: '700px' }}>
             <Card style={{ borderRadius: 80, fontFamily: "Play", backgroundColor: '#C9E956', marginTop: '60px', display: 'flex', justifyContent: 'center', alignItems: 'center' }} className="p-5 #FFFAF4">
                 <p style={{ fontSize: '24px' }}>Регистрация</p>
                 <Form className="d-flex flex-column">
@@ -72,7 +73,7 @@ const Registration = observer(() => {
                         </Button>
                     </p>
                 </Form>
-            </Card>
+            </Card><NavBar2 />
         </Container>
     );
 });

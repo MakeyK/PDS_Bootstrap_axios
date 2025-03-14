@@ -7,6 +7,7 @@ import { getAllUsers as fetchAllUsers } from '../http/userApi'; // Измене�
 import { Context } from "../index";
 import ListUser from "../components/listUsers";
 import { ADMIN_ROUTE, UPDATE_ROUTE } from "../utils/consts";
+import NavBar from "../components/NavBar";
 
 const GetUsers = observer(() => {
     document.body.style.backgroundColor = "#313131";
@@ -26,7 +27,7 @@ const GetUsers = observer(() => {
 
     useEffect(() => {
         getAllUsers();
-    }, []);
+    }, [UserRequest]);
 
     const per = async () => {
         navigate(ADMIN_ROUTE)
@@ -37,7 +38,7 @@ const GetUsers = observer(() => {
     };
 
     return (
-        <Container style={{ backgroundColor: '#313131', borderRadius: '15px', marginTop: '6px', fontFamily: "Play", width: '500px' }}>
+        <Container style={{ backgroundColor: '#313131', borderRadius: '15px', marginTop: '200px', fontFamily: "Play", width: '500px' }}>
             <Card style={{ borderRadius: 80, fontFamily: "Play", backgroundColor: '#C9E956', marginTop: '60px' }} className="p-5 #FFFAF4">
                 <p style={{ fontSize: '24px' }}>Вывод всех пользователей</p>
                 <p style={{ marginTop: '30px', display: 'flex', justifyContent: 'center' }}>
@@ -62,7 +63,7 @@ const GetUsers = observer(() => {
                 variant={"success"}
                 style={{ fontWeight: 'bold', borderRadius: 37, width: '250px', height: '70px', marginTop: "50px", marginLeft: '120px' }}
                 onClick={per}> Вернуться обратно
-            </Button>
+            </Button><NavBar/>
         </Container>
     );
 });

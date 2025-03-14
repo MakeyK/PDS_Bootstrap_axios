@@ -9,6 +9,7 @@ import Modal from 'react-bootstrap/Modal';
 import { GETUSER_ROUTE, UPDATEPASSENGER_ROUTE, UPDATE_ROUTE } from "../utils/consts";
 import ButtonGroup from 'react-bootstrap/ButtonGroup';
 import ButtonToolbar from 'react-bootstrap/ButtonToolbar';
+import NavBar from "../components/NavBar";
 
 const AdminPanel = observer(() => {
     document.body.style.backgroundColor = "#313131";
@@ -49,7 +50,7 @@ const AdminPanel = observer(() => {
     }
 
     return (
-        <Container style={{ backgroundColor: '#313131', borderRadius: '15px', marginTop: '6px', fontFamily: "Play", width: '500px' }}>
+        <Container style={{ backgroundColor: '#313131', borderRadius: '15px', marginTop: '200px', fontFamily: "Play", width: '500px' }}>
 
             <Card style={{ borderRadius: 80, fontFamily: "Play", backgroundColor: '#C9E956', marginTop: '60px', display: 'flex', justifyContent: 'center', alignItems: 'center' }} className="p-5 #FFFAF4">
                 <p style={{ fontSize: '24px' }}>Добавление данных о поезде в БД</p>
@@ -168,7 +169,7 @@ const AdminPanel = observer(() => {
                             </Button>
                         </Modal.Footer>
                     </Modal>
-                </Form></Card>
+                </Form></Card><NavBar/>
         </Container>
     );
 });

@@ -6,6 +6,7 @@ import { useLocation, useNavigate } from "react-router-dom";
 import { createPassengers } from '../http/userApi'
 import { Context } from "../index";
 import { UPDATE_ROUTE, ADMIN_ROUTE } from "../utils/consts";
+import NavBar from "../components/NavBar";
 
 const PostPassenger = observer(() => {
     document.body.style.backgroundColor = "#313131"
@@ -35,7 +36,7 @@ const PostPassenger = observer(() => {
     };
 
     return (
-        <Container style={{ backgroundColor: '#313131', borderRadius: '15px', marginTop: '6px', fontFamily: "Play", width: '500px' }}>
+        <Container style={{ backgroundColor: '#313131', borderRadius: '15px', marginTop: '200px', fontFamily: "Play", width: '500px' }}>
             <Card style={{ borderRadius: 80, fontFamily: "Play", backgroundColor: '#C9E956', marginTop: '60px' }} className="p-5 #FFFAF4">
                 <p style={{ fontSize: '24px' }}>Добавить личные данные</p>
                 <Form className="d-flex flex-column">
@@ -79,7 +80,7 @@ const PostPassenger = observer(() => {
                 variant={"success"}
                 style={{ fontWeight: 'bold', borderRadius: 37, width: '250px', height: '70px', marginTop: "50px", marginLeft: '120px' }}
                 onClick={per}> Вернуться обратно
-            </Button>
+            </Button><NavBar/>
         </Container>
     );
 }

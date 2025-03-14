@@ -40,15 +40,17 @@ class AuthController {
       const { login, password } = req.body
       const user = await Users.findOne({ where: { login } })
       if (!user) {
-        return next(ApiError.internal('Пользователь не найден'))
+        return next(ApiError.interval('Пользователь не найден'))
       }
       const token = generateJwt(user.id_user, user.login, user.role)
-      return res.json({ token })
+      res.json({ token : token })
     } catch (error) {
       console.log(error)
       return next(ApiError.badRequest("Сервер чуть не сгорел"))
     }
   }
+
+
 }
 
 
