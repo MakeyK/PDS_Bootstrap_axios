@@ -5,31 +5,28 @@ import 'bootstrap/dist/css/bootstrap.min.css';
 import { useNavigate } from "react-router-dom";
 import { getAllPassengers } from '../http/userApi';
 import { Context } from "../index";
-import { ADMIN_ROUTE } from "../utils/consts";
 import ListPassengers from "../components/ListPassengers";
 import NavBar from "../components/NavBar";
 
-const UpdatePassenger = observer(() => {
+const GetPassengers = observer(() => {
     document.body.style.backgroundColor = "#313131";
     const navigate = useNavigate();
     const { UserRequest } = useContext(Context);
     const [showList, setShowList] = useState(false);
 
-    const per = () => {
-        navigate(ADMIN_ROUTE);
-    };
     const fetchAllPassengers = async () => {
         try {
             const response = await getAllPassengers();
+            console.log(response);
             UserRequest.setUserRequest(response);
         } catch (error) {
-            alert(error);
+            alert(error.message);
         }
-    };
+    };    
 
     useEffect(() => {
-        fetchAllPassengers();
-    }, []);
+        fetchAllPassengers().then((data)=> UserRequest.setUserRequest(data));
+    }, [UserRequest]);
 
     const handleToggleList = () => {
         setShowList(prevShowList => !prevShowList);
@@ -49,19 +46,16 @@ const UpdatePassenger = observer(() => {
                         {showList ? "Скрыть пассажиров" : "Вывести всех пассажиров"}
                     </Button>
                 </p>
-                </Card>
-                {showList && UserRequest.getUserRequest() && UserRequest.getUserRequest().length > 0 ? (
-                    <ListPassengers user={UserRequest.getUserRequest()} />
-                ) : (showList && <div style={{ borderRadius: 37, marginTop: '30px', justifyContent: 'center', display: 'flex', alignItems: 'center', fontSize: '24px' }}>Недостаточно прав или нет пассажиров!</div>
-                )}
-            <Button
-                size={"lg"}
-                variant={"success"}
-                style={{ fontWeight: 'bold', borderRadius: 37, width: '250px', height: '70px', marginTop: "50px", marginLeft: '120px' }}
-                onClick={per}> Вернуться обратно
-            </Button><NavBar/>
+            </Card>
+            {showList && UserRequest.getUserRequest() && UserRequest.getUserRequest().length > 0 ? (
+                <ListPassengers user={UserRequest.getUserRequest()} />
+            ) : (
+                showList && <div style={{ borderRadius: 37, marginTop: '30px', justifyContent: 'center', display: 'flex', alignItems: 'center', fontSize: '24px' }}>Недостаточно прав или нет пассажиров!</div>
+            )}
+
+            <NavBar />
         </Container>
     );
 });
 
-export default UpdatePassenger;
+export default GetPassengers;

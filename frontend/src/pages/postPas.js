@@ -28,13 +28,6 @@ const PostPassenger = observer(() => {
             alert(error)
         }
     }
-    const update = async () => {
-        navigate(UPDATE_ROUTE)
-    }
-    const per = () => {
-        navigate(ADMIN_ROUTE);
-    };
-
     return (
         <Container style={{ backgroundColor: '#313131', borderRadius: '15px', marginTop: '200px', fontFamily: "Play", width: '500px' }}>
             <Card style={{ borderRadius: 80, fontFamily: "Play", backgroundColor: '#C9E956', marginTop: '60px' }} className="p-5 #FFFAF4">
@@ -68,19 +61,7 @@ const PostPassenger = observer(() => {
                     </p>
                 </Form>
             </Card>
-            <Button
-                size={"lg"}
-                variant={"outline-success"}
-                style={{ fontWeight: 'bold', borderRadius: 37, width: '300px', height: '70px', marginTop: '30px', marginLeft: '90px' }}
-                onClick={update}>
-                Обновить данные
-            </Button>
-            <Button
-                size={"lg"}
-                variant={"success"}
-                style={{ fontWeight: 'bold', borderRadius: 37, width: '250px', height: '70px', marginTop: "50px", marginLeft: '120px' }}
-                onClick={per}> Вернуться обратно
-            </Button><NavBar/>
+           <NavBar/>
         </Container>
     );
 }

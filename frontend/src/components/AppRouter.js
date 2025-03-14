@@ -30,7 +30,7 @@ const AppRouter = observer(() => {
                     <Route key={path} path={path} element={Component} exact />
                 )
             }
-            <Route path="*" element={<Navigate replace to={REGISTRATION_ROUTE}/>} />
+            <Route path="*" element={<Navigate replace to={LOGIN_ROUTE}/>} />
         </Routes>
     );
 });

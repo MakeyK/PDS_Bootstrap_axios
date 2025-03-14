@@ -29,10 +29,6 @@ const GetUsers = observer(() => {
         getAllUsers();
     }, [UserRequest]);
 
-    const per = async () => {
-        navigate(ADMIN_ROUTE)
-    }
-
     const handleToggleList = () => {
         setShowList(prevShowList => !prevShowList);
     };
@@ -51,19 +47,13 @@ const GetUsers = observer(() => {
                         {showList ? "Скрыть пользователей" : "Вывести всех пользователей"}
                     </Button>
                 </p>
-                </Card>
+            </Card>
             {showList && UserRequest.getUserRequest() && UserRequest.getUserRequest().length > 0 ? (
                 <ListUser user={UserRequest.getUserRequest()} />
             ) : (
-                showList && <div style={{backgroundColor:"#C9E956", borderRadius: 37, marginTop: '30px', justifyContent:'center', display:'flex', alignItems:'center', fontSize:'24px'}}>Недостаточно прав или нет пользователей!</div>
+                showList && <div style={{ borderRadius: 37, marginTop: '30px', justifyContent: 'center', display: 'flex', alignItems: 'center', fontSize: '24px' }}>Недостаточно прав или нет пользователей!</div>
             )}
-
-            <Button
-                size={"lg"}
-                variant={"success"}
-                style={{ fontWeight: 'bold', borderRadius: 37, width: '250px', height: '70px', marginTop: "50px", marginLeft: '120px' }}
-                onClick={per}> Вернуться обратно
-            </Button><NavBar/>
+            <NavBar />
         </Container>
     );
 });

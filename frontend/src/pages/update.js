@@ -104,19 +104,7 @@ const UpdateUser = observer(() => {
                         </Button></p>
                 </Form>
             </Card>
-            <Button
-                size={"lg"}
-                variant={"success"}
-                style={{ fontWeight: 'bold', borderRadius: 37, width: '250px', height: '70px', marginTop: "50px", marginLeft: '120px' }}
-                onClick={per1}> Добавить данные о себе
-            </Button>
-
-            <Button
-                size={"lg"}
-                variant={"success"}
-                style={{ fontWeight: 'bold', borderRadius: 37, width: '250px', height: '70px', marginTop: "50px", marginLeft: '120px' }}
-                onClick={per}> Вернуться обратно
-            </Button><NavBar/>
+            <NavBar/>
         </Container>
     );
 });
