@@ -22,9 +22,17 @@ class DBControllerUPassengers {
     }
     // Вывод всей таблицы Passengers
     async getAll(req, res) {
-        const passengers = await Passengers.findAll()
-        return res.json(passengers)
+        try {
+            console.log('back')
+            const passengers = await Passengers.findAll();
+            console.log(passengers)
+            return res.json(passengers);
+        } catch (error) {
+            console.error(error);
+            return res.status(500).json({ message: 'Ошибка при получении пассажиров' });
+        }
     }
+
     // Вывод записей по определённому ID таблицы Passengers
     async getID(req, res) {
         const { id_passenger } = req.params

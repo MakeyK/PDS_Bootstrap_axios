@@ -10,8 +10,7 @@ const user = new UserStore();
 const root = ReactDOM.createRoot(document.getElementById('root')); 
 root.render( 
   <React.StrictMode> 
-  <Context.Provider value = {{ 
-    user,
+  <Context.Provider value = {{
     user: new UserStore(),
     UserRequest: new UserRequest()}}> 
     <App/>

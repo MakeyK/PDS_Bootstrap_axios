@@ -26,8 +26,9 @@ router.post('/createvan', authMiddleware, DBControllerVans.createVans)
 router.post('/createstation', authMiddleware, DBControllerStations.createStations)
 
 // Выборка всех записей из таблицы
-router.get('/getallusers', DBControllerUsers.getAll)
 router.get('/getallpassengers', DBControllerPassengers.getAll)
+router.get('/getallusers', authMiddleware, DBControllerUsers.getAll)
+
 router.get('/getallschedules', DBControllerSchedules.getAll)
 router.get('/getalltrains', DBControllerTrains.getAll)
 router.get('/getalltickets', DBControllerTickets.getAll)

@@ -3,11 +3,12 @@ import Admin from "./pages/admin"
 import { ADMIN_ROUTE, GETUSER_ROUTE, LOGIN_ROUTE, POSTPASSNGER_ROUTE, ADMINPANEL_ROUTE, REGISTRATION_ROUTE, UPDATEPASSENGER_ROUTE, UPDATE_ROUTE, GETPASSENGER_ROUTE } from "./utils/consts"
 import GetUsers from "./pages/getusers"
 import UpdateUser from "./pages/update"
-import UpdatePassenger from "./pages/passenger"
+import UpdatePassenger from "./pages/updatePassenger"
 import Registration from "./pages/registration"
 import PostPassenger from "./pages/postPas"
 import Login from './pages/login'
 import AdminPanel from "./pages/adminpanel"
+import GetPassengers from "./pages/updatePassenger"
 
 export const adminRoutes = [
     {
@@ -31,7 +32,7 @@ export const authRoutes = [
     },
     {
         path: UPDATEPASSENGER_ROUTE,
-        Component: <UpdatePassenger/>
+        Component: <GetPassengers/>
     },
     {
         path: ADMIN_ROUTE,
