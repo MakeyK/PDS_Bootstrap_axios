@@ -39,7 +39,7 @@ class DBControllerTrains
     async DelId(req,res)
     {
         const {id_train} = req.params
-        const id_train1 = parseInt(id_train)
+        const id_train1 = (id_train)
         console.log(id_train1)
         console.log(id_train)
         let delidtr = await Trains.destroy({where:{id_train: id_train1}})

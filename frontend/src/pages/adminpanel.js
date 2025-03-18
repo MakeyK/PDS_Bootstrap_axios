@@ -21,6 +21,7 @@ const AdminPanel = observer(() => {
     const [id_user, setIDUser] = useState('')
     const [id_train1, setID_Train1] = useState('')
     const [showModal, setShowModal] = useState(false);
+    const [showModal2, setShowModal2] = useState(false);
 
     const train = async (number_train, type_train) => {
         try {
@@ -34,6 +35,7 @@ const AdminPanel = observer(() => {
 
     const deltrain = async (id_train1) => {
         try {
+            console.log(id_train1)
             const response = await deleteIDTrain(id_train1)
             console.log({ message: `Удален поезд под ${id_train1}`, response })
         } catch (error) {
@@ -99,10 +101,10 @@ const AdminPanel = observer(() => {
                             size={"lg"}
                             variant={"outline-success"}
                             style={{ fontWeight: 'bold', borderRadius: 37, width: '180px', height: '70px' }}
-                            onClick={() => setShowModal(true)}>
+                            onClick={() => setShowModal2(true)}>
                             Удалить
                         </Button></p>
-                    <Modal style={{ fontFamily: 'Play' }} show={showModal} onHide={() => setShowModal(false)}>
+                    <Modal style={{ fontFamily: 'Play' }} show={showModal2} onHide={() => setShowModal2(false)}>
                         <Modal.Header style={{ backgroundColor: '#C9E956', fontSize: '24px' }} closeButton>
                             <Modal.Title>Подтверждение удаления</Modal.Title>
                         </Modal.Header>
@@ -110,7 +112,7 @@ const AdminPanel = observer(() => {
                             Вы уверены, что хотите удалить эту запись?
                         </Modal.Body>
                         <Modal.Footer style={{ backgroundColor: '#C9E956' }}>
-                            <Button variant="secondary" onClick={() => setShowModal(false)}
+                            <Button variant="secondary" onClick={() => setShowModal2(false)}
                                 style={{ fontSize: '18px' }}>
                                 Отмена
                             </Button>
@@ -118,7 +120,7 @@ const AdminPanel = observer(() => {
                                 style={{ fontSize: '18px' }}
                                 onClick={() => {
                                     deltrain(id_train1)
-                                    setShowModal(false)
+                                    setShowModal2(false)
                                 }}>
                                 Да, удалить
                             </Button>

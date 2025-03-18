@@ -21,8 +21,7 @@ const Login = observer(() => {
         try {
             const response = await logins(login, password)
             console.log(localStorage.getItem("token"))
-            if (!response) return
-            navigate(ADMIN_ROUTE)
+            // navigate(ADMIN_ROUTE)
         } catch (error) {
             console.log(error)
             alert(error)
@@ -52,7 +51,6 @@ const Login = observer(() => {
 
                     <p style={{ marginTop: '30px', display: 'flex', justifyContent: 'center' }}>
                         <Button
-                            type="submit"
                             size={"lg"}
                             variant={"outline-success"}
                             style={{ fontWeight: 'bold', borderRadius: 37, width: '250px', height: '70px' }}

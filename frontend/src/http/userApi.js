@@ -10,13 +10,14 @@ export const registration = async (login, password, secretKey) => {
 
 export const logins = async (login, password) => {
     try {
+        console.log('api')
         const { data } = await $host.post('mak/rout/login', { login, password })
         localStorage.setItem('token', data.token)
+        console.log(data)
         return jwtDecode(data.token)
     } catch (error) {
         alert(error.response.data.message)
         return
-
     }}
 
     export const createTrains = async (number_train, type_train) => {
@@ -57,6 +58,7 @@ export const logins = async (login, password) => {
 
     export const deleteIDTrain = async (id_train1) => {
         try {
+            console.log('Удаление')
             const { data } = await $authHost.delete(`mak/rout/del/${id_train1}`)
             console.log(data)
             return data
